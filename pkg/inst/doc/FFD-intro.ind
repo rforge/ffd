@@ -1,0 +1,46 @@
+\begin{theindex}
+
+  \item \texttt{IndSamplingSummary}, \hyperpage{7}
+  \item \texttt{IndSampling}, \hyperpage{9}
+  \item \texttt{LtdSamplingSummary}, \hyperpage{11}
+  \item \texttt{LtdSampling}, \hyperpage{12}
+  \item \texttt{SurveyData}, \hyperpage{6}
+  \item \texttt{computeAlphaLimitedSampling()}, \hyperpage{15}
+  \item \texttt{computeOptimalSampleSize()}, \hyperpage{14}
+  \item \texttt{computePValue()}, \hyperpage{13}
+  \item \texttt{indSampling()}, \hyperpage{9}
+  \item \texttt{indSamplingSummary()}, \hyperpage{7}
+  \item \texttt{ltdSampling()}, \hyperpage{12}
+  \item \texttt{ltdSamplingSummary()}, \hyperpage{11}
+  \item \texttt{surveyData()}, \hyperpage{6}
+
+  \indexspace
+
+  \item Class
+    \subitem \texttt{IndSamplingSummary}, \hyperpage{7}
+    \subitem \texttt{IndSampling}, \hyperpage{9}
+    \subitem \texttt{LtdSamplingSummary}, \hyperpage{11}
+    \subitem \texttt{LtdSampling}, \hyperpage{12}
+    \subitem \texttt{SurveyData}, \hyperpage{6}
+
+  \indexspace
+
+  \item Method
+    \subitem \texttt{HTML-IndSamplingSummary}, \hyperpage{9}
+    \subitem \texttt{HTML-IndSampling}, \hyperpage{9}
+    \subitem \texttt{HTML-LtdSamplingSummary}, \hyperpage{12}
+    \subitem \texttt{HTML-LtdSampling}, \hyperpage{12}
+    \subitem \texttt{plot-IndSamplingSummary}, \hyperpage{8}
+    \subitem \texttt{plot-LtdSamplingSummary}, \hyperpage{11}
+    \subitem \texttt{show-IndSamplingSummary}, \hyperpage{8}
+    \subitem \texttt{show-IndSampling}, \hyperpage{9}
+    \subitem \texttt{show-LtdSamplingSummary}, \hyperpage{11}
+    \subitem \texttt{show-LtdSampling}, \hyperpage{12}
+    \subitem \texttt{show-SurveyData}, \hyperpage{7}
+    \subitem \texttt{summary-IndSamplingSummary}, \hyperpage{8}
+    \subitem \texttt{summary-IndSampling}, \hyperpage{9}
+    \subitem \texttt{summary-LtdSamplingSummary}, \hyperpage{11}
+    \subitem \texttt{summary-LtdSampling}, \hyperpage{12}
+    \subitem \texttt{summary-SurveyData}, \hyperpage{7}
+
+\end{theindex}

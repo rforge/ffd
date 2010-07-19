@@ -1,0 +1,28 @@
+\begin{thebibliography}{3}
+\newcommand{\enquote}[1]{``#1''}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Cameron and Baldock(1998{\natexlab{a}})}]{CaBa98A}
+Cameron AR, Baldock FC (1998{\natexlab{a}}).
+\newblock \enquote{A new probability formula for surveys to substantiate
+  freedom from disease.}
+\newblock \emph{Preventive Veterinary Medicine}, \textbf{34}, 1--17.
+
+\bibitem[{Cameron and Baldock(1998{\natexlab{b}})}]{CaBa98B}
+Cameron AR, Baldock FC (1998{\natexlab{b}}).
+\newblock \enquote{Two-stage sampling surveys to substantiate freedom from
+  disease.}
+\newblock \emph{Preventive Veterinary Medicine}, \textbf{34}, 19--30.
+
+\bibitem[{Ziller \emph{et~al.}(2002)Ziller, Selhorst, Teuffert, Kramer, and
+  Schl\"uter}]{Ziller02}
+Ziller M, Selhorst T, Teuffert J, Kramer M, Schl\"uter H (2002).
+\newblock \enquote{Analysis of sampling strategies to substantiate freedom from
+  disease in large areas.}
+\newblock \emph{Preventive Veterinary Medicine}, \textbf{52}, 333--343.
+
+\end{thebibliography}

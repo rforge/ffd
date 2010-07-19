@@ -1,0 +1,32 @@
+useDynLib(FFD)
+
+import(methods)
+importFrom(R2HTML, HTML, HTMLInitFile, HTMLEndFile)
+importFrom(graphics,plot)
+
+exportClasses(
+              SurveyData,
+              IndSampling,
+              IndSamplingSummary,
+              LtdSampling,
+              LtdSamplingSummary
+              )
+              
+export(
+       computeAlphaLimitedSampling,
+       computeAposterioriError,
+       computeOptimalSampleSize,
+       computePValue,
+       indSampling,
+       indSamplingSummary,
+       ltdSampling,
+       ltdSamplingSummary,
+       surveyData
+       )
+
+exportMethods(
+              HTML,
+              plot,
+              show,
+              summary
+              )

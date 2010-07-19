@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{Section.0.Introduction.1}{Introduction}{}
+\BOOKMARK [1][-]{Section.1.The basics of two-stage sampling.1}{The basics of two-stage sampling}{}
+\BOOKMARK [2][-]{Subsection.2.0.One-stage sampling.2}{One-stage sampling}{Section.1.The basics of two-stage sampling.1}
+\BOOKMARK [2][-]{Subsection.2.1.Two-stage sampling.2}{Two-stage sampling}{Section.1.The basics of two-stage sampling.1}
+\BOOKMARK [3][-]{Subsubsection.2.2.0.Individual sampling.3}{Individual sampling}{Subsection.2.1.Two-stage sampling.2}
+\BOOKMARK [3][-]{Subsubsection.2.2.1.Limited sampling.3}{Limited sampling}{Subsection.2.1.Two-stage sampling.2}
+\BOOKMARK [1][-]{Section.2.FFD using the S4 classes and methods.1}{FFD using the S4 classes and methods}{}
+\BOOKMARK [2][-]{Subsection.3.0.Specifying the survey parameters.2}{Specifying the survey parameters}{Section.2.FFD using the S4 classes and methods.1}
+\BOOKMARK [2][-]{Subsection.3.1.Individual sampling.2}{Individual sampling}{Section.2.FFD using the S4 classes and methods.1}
+\BOOKMARK [3][-]{Subsubsection.3.2.0.Cost optimization.3}{Cost optimization}{Subsection.3.1.Individual sampling.2}
+\BOOKMARK [3][-]{Subsubsection.3.2.1.Parameters for a fixed herd sensitivity.3}{Parameters for a fixed herd sensitivity}{Subsection.3.1.Individual sampling.2}
+\BOOKMARK [2][-]{Subsection.3.2.Limited sampling.2}{Limited sampling}{Section.2.FFD using the S4 classes and methods.1}
+\BOOKMARK [3][-]{Subsubsection.3.3.0.Cost optimization.3}{Cost optimization}{Subsection.3.2.Limited sampling.2}
+\BOOKMARK [3][-]{Subsubsection.3.3.1.Parameters for a fixed sample limit.3}{Parameters for a fixed sample limit}{Subsection.3.2.Limited sampling.2}
+\BOOKMARK [1][-]{Section.3.Using FFD without classes.1}{Using FFD without classes}{}
+\BOOKMARK [2][-]{Subsection.4.0.Individual sampling.2}{Individual sampling}{Section.3.Using FFD without classes.1}
+\BOOKMARK [2][-]{Subsection.4.1.Limited sampling.2}{Limited sampling}{Section.3.Using FFD without classes.1}
