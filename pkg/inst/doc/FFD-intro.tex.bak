@@ -73,7 +73,7 @@ corresponding to a specific sample of herds.}
 The package is still in the pre-alpha phase of development. Not all 
 functionalities are implemented yet. This especially includes 
 methods for sampling using pre-fixed sample sizes, as well as 
-dynamic sampling based on realtime computation of a posteriori 
+dynamic sampling based on realtime computation of a-posteriori 
 alpha-errors. These features will be included soon. 
 
 
@@ -357,7 +357,7 @@ proportion of herds with size $j$ in the population, i.e., the
 sensitivity as herd sensitivity the number of herds to be tested can 
 again be determined using (\ref{eq:hypergeom_senspec_T0_simple}). 
 
-Simlilar to the herd sensitivity in individual sampling the sample 
+Similar to the herd sensitivity in individual sampling the sample 
 limit determines the balance between the number of animals to test 
 per herd and the number of herds to test, while maintaining a 
 constant significance level.  
@@ -367,7 +367,8 @@ constant significance level.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{FFD using the S4 classes and methods}
+\section{Sample size calculation using S4 classes}
+%\section{FFD using the S4 classes and methods}
 \label{sec:using-ffd-S4}
 
 The package \texttt{FFD} offers convenient tools to compute the 
@@ -667,7 +668,7 @@ For limited sampling a pre-fixed number of animals per selected herd
 (=the sample limit) is tested, irrespective of the actual herd size. 
 The chosen sample limit determines the (mean) herd sensitivity and 
 thus the sample size on a herd level. The sample limit and the 
-number of herds act in a comlementary fashion in the sense that low 
+number of herds act in a complementary fashion in the sense that low 
 sampling limits result in a large number of herds to be tested and 
 vice versa. If the cost per tested herd and the cost per tested 
 animal is known the package can be used to find the cost optimal 
@@ -831,7 +832,7 @@ Expected total costs of the survey:        111478.48
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{Using FFD without classes}
+\section{Sample size calculation without classes}
 \label{sec:using-ffd-noclass}
 
 In order to provide sufficient flexibility \texttt{FFD} offers a set 
@@ -937,7 +938,7 @@ $\alpha$-values of the herd test, as well as the mean $\alpha$ (= 1
 \texttt{computeAlphaLimitedSampling()}. 
 \index{\texttt{computeAlphaLimitedSampling()}} The function takes a 
 vector containing the herd sizes for each holding, the sample limit, 
-the intra herd prevalence and sensitivtiy and specificity of the 
+the intra herd prevalence and sensitivity and specificity of the 
 diagnostic test and returns a list with two elements. The first 
 element \texttt{alphaDataFrame} is a data frame with columns 
 \texttt{size} and \texttt{alpha} containing the alpha-errors 
@@ -974,7 +975,18 @@ significance level (\texttt{alpha}), the mean herd sensitivity = 1 -
 \texttt{lookupTable} should be kept at their default values.
 
 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\section{A-posteriori calculation of the alpha-error}
+\label{sec:aposteriori}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
 
 \printindex
 

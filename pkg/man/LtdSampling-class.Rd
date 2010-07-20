@@ -3,6 +3,7 @@
 \docType{class}
 \alias{LtdSampling-class}
 \alias{HTML,LtdSampling-method}
+\alias{sample,LtdSampling-method}
 \alias{show,LtdSampling-method}
 \alias{summary,LtdSampling-method}
 
@@ -43,6 +44,15 @@ Objects can be created by calls of the form \code{new("LtdSampling", ...)}.
 \section{Methods}{
   \describe{
     \item{HTML}{\code{signature(x = "LtdSampling")}: Write object data summary into html-file.}
+    \item{sample}{\code{signature(x = "LtdSampling")}: Sample herds using limited sampling. Additionally
+        to the argument \code{x} of type \code{LtdSampling} the method takes an argument \code{size},
+        which is a character string. For \code{size == "fixed"} the fixed number of herds
+        given in \code{x@nHerds} is sampled using simple random sampling. For \code{size == "dynamic"} 
+        dynamic sampling is used, i.e., based on real-time computation of the a-posteriori alpha-
+        error the sample is updated until the a-posteriori alpha-error falls below the predefined
+        significance level x@alpha. The return value is a list with two items: \code{indexSample} is
+        a vector of indices of the sample corresponding to \code{x@surveyData@nAnimalVec} and 
+        \code{aPostAlpha} containing the a-posteriori alpha-error of the sample.}
     \item{show}{\code{signature(object = "LtdSampling")}: Display structure of the class and content 
         of the slots.}
     \item{summary}{\code{signature(object = "LtdSampling")}: Display structure of the class and a 

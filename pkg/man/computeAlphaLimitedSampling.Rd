@@ -28,7 +28,7 @@ less than \code{sampleSizeLtd} animals the entire herd is tested.
 }
   \item{intraHerdPrevalence}{
 Numeric between 0 and 1. Intra-herd prevalence. The number of diseased
-animals is computed as 
+animals per herd is computed as 
 \code{max(1,round(intraHerdPrevalence*stockSizeVector))}
 (it is assumed that at least one animal is diseased).
 }
@@ -67,7 +67,7 @@ Ian Kopacka <ian.kopacka@ages.at>
 data(sheepData)
 alphaList <- computeAlphaLimitedSampling(stockSizeVector = 
     sheepData$nSheep, sampleSizeLtd = 7, 
-    intraHerdPrevalence = 0.13, diagSensitivity = 0.9, 
+    intraHerdPrevalence = 0.2, diagSensitivity = 0.9, 
     diagSpecificity = 1)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

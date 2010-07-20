@@ -36,7 +36,8 @@ using two-stage sampling}
 
 <<echo=false,results=hide>>=
 set.seed(1504)
-options(width=70, prompt = "> ", continue = "+  ", useFancyQuotes = FALSE)
+#options(width=70, prompt = "R> ", continue = "+  ", useFancyQuotes = FALSE)
+options(width=70, prompt = "> ", continue = "   ", useFancyQuotes = FALSE)
 ps.options(family="Times")
 library("FFD")
 data("sheepData")
@@ -59,8 +60,12 @@ computed using \texttt{FFD}. The package furthermore includes tools
 for evaluating the a-posteriori significance ($=1-\alpha$) 
 corresponding to a specific sample of herds.} 
 
-\Keywords{\proglang{R}}
-\Plainkeywords{R}
+\Keywords{\proglang{R}, freedom from disease, sample size 
+calculation, individual sampling, limited sampling, a-posteriori 
+alpha-error} 
+\Plainkeywords{R, freedom from disease, sample size 
+calculation, individual sampling, limited sampling, a-posteriori 
+alpha-error} 
 
 %%\usepackage{Sweave} %% already provided by jss.cls
 %%\VignetteIndexEntry{FFD: Package to substantiate freedom from disease in R}
@@ -80,7 +85,7 @@ corresponding to a specific sample of herds.}
 The package is still in the pre-alpha phase of development. Not all 
 functionalities are implemented yet. This especially includes 
 methods for sampling using pre-fixed sample sizes, as well as 
-dynamic sampling based on realtime computation of a posteriori 
+dynamic sampling based on realtime computation of a-posteriori 
 alpha-errors. These features will be included soon. 
 
 
@@ -364,7 +369,7 @@ proportion of herds with size $j$ in the population, i.e., the
 sensitivity as herd sensitivity the number of herds to be tested can 
 again be determined using (\ref{eq:hypergeom_senspec_T0_simple}). 
 
-Simlilar to the herd sensitivity in individual sampling the sample 
+Similar to the herd sensitivity in individual sampling the sample 
 limit determines the balance between the number of animals to test 
 per herd and the number of herds to test, while maintaining a 
 constant significance level.  
@@ -374,7 +379,8 @@ constant significance level.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{FFD using the S4 classes and methods}
+\section{Sample size calculation using S4 classes}
+%\section{FFD using the S4 classes and methods}
 \label{sec:using-ffd-S4}
 
 The package \texttt{FFD} offers convenient tools to compute the 
@@ -497,10 +503,6 @@ diagnostic test, the step size for the discretization is either
 specified by the user or a default value of 0.02 is used.
 
 <<>>=
-mySurvey <- surveyData(nAnimalVec = sheepData$nSheep, 
-    populationData = sheepData, designPrevalence = 0.002, 
-    alpha = 0.05, intraHerdPrevalence = 0.2,
-    diagSensitivity = 0.9, costHerd = 15, costAnimal = 30)
 myIndSamplingSummary <- indSamplingSummary(survey.Data = mySurvey, 
     stepSize = 0.05)
 summary(myIndSamplingSummary)
@@ -573,7 +575,7 @@ For limited sampling a pre-fixed number of animals per selected herd
 (=the sample limit) is tested, irrespective of the actual herd size. 
 The chosen sample limit determines the (mean) herd sensitivity and 
 thus the sample size on a herd level. The sample limit and the 
-number of herds act in a comlementary fashion in the sense that low 
+number of herds act in a complementary fashion in the sense that low 
 sampling limits result in a large number of herds to be tested and 
 vice versa. If the cost per tested herd and the cost per tested 
 animal is known the package can be used to find the cost optimal 
@@ -664,7 +666,7 @@ summary(myLtdSampling)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{Using FFD without classes}
+\section{Sample size calculation without classes}
 \label{sec:using-ffd-noclass}
 
 In order to provide sufficient flexibility \texttt{FFD} offers a set 
@@ -748,7 +750,7 @@ $\alpha$-values of the herd test, as well as the mean $\alpha$ (= 1
 \texttt{computeAlphaLimitedSampling()}. 
 \index{\texttt{computeAlphaLimitedSampling()}} The function takes a 
 vector containing the herd sizes for each holding, the sample limit, 
-the intra herd prevalence and sensitivtiy and specificity of the 
+the intra herd prevalence and sensitivity and specificity of the 
 diagnostic test and returns a list with two elements. The first 
 element \texttt{alphaDataFrame} is a data frame with columns 
 \texttt{size} and \texttt{alpha} containing the alpha-errors 
@@ -773,7 +775,115 @@ significance level (\texttt{alpha}), the mean herd sensitivity = 1 -
 \texttt{lookupTable} should be kept at their default values.
 
 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\section{A-posteriori calculation of the alpha-error}
+\label{sec:aposteriori}
+
+The calculation of the sample size on herd level, i.e., the number 
+of herds to test is based on the herd sensitivity. For limited 
+sampling the herd sensitivity depends on the size of each herd, 
+hence a mean herd sensitivity is used for the sample size 
+calculation. This, on the other hand, means that the overall 
+significance level of the scheme depends on the chosen sample, i.e., 
+if the sample contains a high proportion of very large herds the 
+mean herd sensitivity in the sample is lower than the mean herd 
+sensitivity in the population and hence the desired overall 
+significance level is not met. If the sample contains a lot of very 
+small herds, then the mean herd sensitivity in the sample exceeds 
+that of the population and the significance of the sampling scheme 
+falls below the desired significance level, i.e., the sampling 
+scheme is ``too thorough'', more herds are being tested than 
+necessary. 
+
+It is therefore of interest to compute the significance level of the 
+sampling scheme after the sample has been drawn, i.e., to compute 
+the a-posteriori alpha-error, which is the probability of finding no 
+testpositives in the \textbf{given sample}, given that the disease 
+is present at the design prevalence. The a-posteriori alpha-error 
+can then be used to assess a given sample and to possibly modify it, 
+i.e., reduce or extend it in order to meet the prescribed 
+significance level. 
+
+The a-posteriori analysis of the alpha-error is also of interest 
+when using individual sampling. With individual sampling the number 
+of animals to test is computed for every herd size, in order to 
+guarantee the ``same'' herd sensitivity for every herd. The herd 
+sensitivity as a function of the number of animals tested is however 
+a discrete function with jumps. The exact value can in most cases 
+not be achieved and the desired herd sensitivity is taken as a lower 
+bound, i.e., for each herd the number of animals to test is computed 
+as the smallest number that achieves a herd sensitivity greater or 
+equal to the desired value. E.g., for a herd of a given size the 
+herd sensitivity when testing 4 animals might be 0.68 and for 5 
+animals it might be 0.74. If the desired herd sensitivtiy is 0.7 
+then 5 animals would be tested. The mean herd sensitivity for 
+individual sampling therefore always exceeds the desired value, 
+hence the number of herds to test is generally higher than 
+necessary. 
+
+The package \texttt{FFD} offers tools to compute the a-posteriori 
+alpha-error for a given sample. Furthermore a sampling scheme is 
+implemented that dynamically updates the a-posteriori alpha-error 
+during the sampling procedure and updates the sample size 
+automatically in order to prevent under- or overestimation of the 
+sample size. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computation of the a-posteriori alpha-error using 
+\texttt{FFD}}
+
+The a-posteriori error of a given sample can be computed using the 
+function \texttt{computeAposterioriError()}. 
+\index{\texttt{computeAposterioriError()}} The function requires the 
+population size, the number of diseased elements in the population 
+according to the design prevalence and a vector of the herd-level 
+alpha-errors of the herds in the sample (= 1 - herd sensitivity). 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Sampling using S4 classes} 
+\label{subsec:sampling_with_class}
+
+The method \texttt{sample()} 
+\index{Method!\texttt{sample-IndSampling}}\index{Method!\texttt{sample-LtdSampling}} 
+has been implemented for the classes \texttt{IndSampling} and 
+\texttt{IndSampling}. It takes two arguments, the first argument 
+\texttt{x} is an object of the class \texttt{IndSampling} or 
+\texttt{LtdSampling} and the second argument \texttt{size} is a 
+character string specifying the sampling strategy. For \texttt{size 
+= "fixed"} the fixed number \texttt{x@nHerds} of herds is sampled 
+using simple random sampling. For \texttt{size = "dynamic"} dynamic 
+sampling is used. The method returns a list with two items: a vector 
+of indices of the sampled herds corresponding to 
+\texttt{x@surveyData@nAnimalVec} and the a-posteriori alpha-error of 
+the sample:
+
+<<>>= 
+## Fixed sampling:
+##################
+sampleFixed <- sample(x = myIndSampling, size = "fixed")
+## Sample Size:
+length(sampleFixed$indexSample)
+## Significance:
+sampleFixed$aPostAlpha
+
+## Dynamic sampling:
+####################
+sampleDynamic <- sample(x = myIndSampling, size = "dynamic")
+## Sample Size:
+length(sampleDynamic$indexSample)
+## Significance:
+sampleDynamic$aPostAlpha
+@ 
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
 
 \printindex
 

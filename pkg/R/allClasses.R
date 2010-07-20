@@ -410,6 +410,77 @@ setMethod("HTML", signature(x = "LtdSampling"),
         invisible(x) 
 })
 
+################################################## SAMPLE:
+##########################################################
+
+setMethod("sample", signature(x = "LtdSampling"),
+    function(x, size, replace, prob){
+        ## Set default value for flag 'size':
+        if (missing(size)) size <- "fixed"
+        
+        ## Sample with fixed sample size:
+        if (size == "fixed"){ 
+            ## Sample x@nHerds herds using simple random sampling:
+            indexSample <- sort(sample(x = seq(along = x@surveyData@nAnimalVec),
+                size = x@nHerds, replace = FALSE))
+            ## Compute the a-posteriori alpha error:
+            alphaErrorVector <- computeAlpha(nAnimalVec = x@surveyData@nAnimalVec[indexSample], 
+                method = "limited", sampleSizeLtd = x@sampleSizeLtd, 
+                intraHerdPrevalence = x@surveyData@intraHerdPrevalence, 
+                diagSensitivity = x@surveyData@diagSensitivity, diagSpecificity = 1)            
+            aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaErrorVector, 
+                nPopulation = length(x@surveyData@nAnimalVec), 
+                nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                method = "approx")
+            out <- list(indexSample = indexSample, aPostAlpha = aPostAlpha)
+        } else {
+            ## Data frame with herd-based alpha-errors for each herd
+            ## (=1-herd sensitivity):
+            alphaErrorVector <- computeAlpha(nAnimalVec = x@surveyData@nAnimalVec, 
+                method = "limited", sampleSizeLtd = x@sampleSizeLtd, 
+                intraHerdPrevalence = x@surveyData@intraHerdPrevalence, 
+                diagSensitivity = x@surveyData@diagSensitivity, diagSpecificity = 1)
+            alphaDataFrame <- data.frame(size = x@surveyData@nAnimalVec, 
+                alpha = alphaErrorVector, id = seq(along = x@surveyData@nAnimalVec))
+            ## Permutate data frame:
+            alphaDataFrame <- alphaDataFrame[sample(x = alphaDataFrame$id, 
+                size = length(alphaDataFrame$id), replace = FALSE),]
+            ## Dynamic sampling: find the smallest integer k such that the 
+            ## sample containing the first k rows of the data frame have
+            ## an a-posteriori error <=  x@surveyData@alpha    
+            k <- x@nHerds  
+            aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaDataFrame$alpha[1:k], 
+                nPopulation = length(x@surveyData@nAnimalVec), 
+                nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                method = "approx")
+            if (aPostAlpha > x@surveyData@alpha){
+                while (aPostAlpha > x@surveyData@alpha){
+                    k <- k + 1
+                    aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaDataFrame$alpha[1:k], 
+                        nPopulation = length(x@surveyData@nAnimalVec), 
+                        nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                        method = "approx")               
+                }            
+            } else {
+                while (aPostAlpha <= x@surveyData@alpha){
+                    k <- k - 1
+                    aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaDataFrame$alpha[1:k], 
+                        nPopulation = length(x@surveyData@nAnimalVec), 
+                        nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                        method = "approx")               
+                }         
+                k <- k + 1
+                aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaDataFrame$alpha[1:k], 
+                    nPopulation = length(x@surveyData@nAnimalVec), 
+                    nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                    method = "approx")                               
+            }
+            out <- list(indexSample = sort(alphaDataFrame$id[1:k]), aPostAlpha = aPostAlpha)            
+        }
+        return(out)        
+    }
+)
+
 ###############################################################################
 ###############################################################################
 ## Class "LtdSamplingSummary"
@@ -938,6 +1009,76 @@ setMethod("HTML", signature(x = "IndSampling"),
         invisible(x) 
 })
 
+################################################## SAMPLE:
+##########################################################
+
+setMethod("sample", signature(x = "IndSampling"),
+    function(x, size, replace, prob){
+        ## Set default value for flag 'size':
+        if (missing(size)) size <- "fixed"
+        
+        ## Sample with fixed sample size:
+        if (size == "fixed"){ 
+            ## Sample x@nHerds herds using simple random sampling:
+            indexSample <- sort(sample(x = seq(along = x@surveyData@nAnimalVec),
+                size = x@nHerds, replace = FALSE))
+            ## Compute the a-posteriori alpha error:
+            alphaErrorVector <- computeAlpha(nAnimalVec = x@surveyData@nAnimalVec[indexSample], 
+                method = "individual", herdSensitivity = x@herdSensitivity, 
+                intraHerdPrevalence = x@surveyData@intraHerdPrevalence, 
+                diagSensitivity = x@surveyData@diagSensitivity, diagSpecificity = 1)            
+            aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaErrorVector, 
+                nPopulation = length(x@surveyData@nAnimalVec), 
+                nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                method = "approx")
+            out <- list(indexSample = indexSample, aPostAlpha = aPostAlpha)
+        } else {
+            ## Data frame with herd-based alpha-errors for each herd
+            ## (=1-herd sensitivity):
+            alphaErrorVector <- computeAlpha(nAnimalVec = x@surveyData@nAnimalVec, 
+                method = "individual", herdSensitivity = x@herdSensitivity, 
+                intraHerdPrevalence = x@surveyData@intraHerdPrevalence, 
+                diagSensitivity = x@surveyData@diagSensitivity, diagSpecificity = 1)
+            alphaDataFrame <- data.frame(size = x@surveyData@nAnimalVec, 
+                alpha = alphaErrorVector, id = seq(along = x@surveyData@nAnimalVec))
+            ## Permutate data frame:
+            alphaDataFrame <- alphaDataFrame[sample(x = alphaDataFrame$id, 
+                size = length(alphaDataFrame$id), replace = FALSE),]
+            ## Dynamic sampling: find the smallest integer k such that the 
+            ## sample containing the first k rows of the data frame have
+            ## an a-posteriori error <=  x@surveyData@alpha    
+            k <- x@nHerds  
+            aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaDataFrame$alpha[1:k], 
+                nPopulation = length(x@surveyData@nAnimalVec), 
+                nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                method = "approx")
+            if (aPostAlpha > x@surveyData@alpha){
+                while (aPostAlpha > x@surveyData@alpha){
+                    k <- k + 1
+                    aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaDataFrame$alpha[1:k], 
+                        nPopulation = length(x@surveyData@nAnimalVec), 
+                        nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                        method = "approx")               
+                }            
+            } else {
+                while (aPostAlpha <= x@surveyData@alpha){
+                    k <- k - 1
+                    aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaDataFrame$alpha[1:k], 
+                        nPopulation = length(x@surveyData@nAnimalVec), 
+                        nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                        method = "approx")               
+                }         
+                k <- k + 1
+                aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaDataFrame$alpha[1:k], 
+                    nPopulation = length(x@surveyData@nAnimalVec), 
+                    nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
+                    method = "approx")                               
+            }
+            out <- list(indexSample = sort(alphaDataFrame$id[1:k]), aPostAlpha = aPostAlpha)            
+        }
+        return(out)        
+    }
+)
 
 
 ###############################################################################

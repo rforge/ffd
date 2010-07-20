@@ -4,14 +4,17 @@
 \BOOKMARK [2][-]{Subsection.2.1.Two-stage sampling.2}{Two-stage sampling}{Section.1.The basics of two-stage sampling.1}
 \BOOKMARK [3][-]{Subsubsection.2.2.0.Individual sampling.3}{Individual sampling}{Subsection.2.1.Two-stage sampling.2}
 \BOOKMARK [3][-]{Subsubsection.2.2.1.Limited sampling.3}{Limited sampling}{Subsection.2.1.Two-stage sampling.2}
-\BOOKMARK [1][-]{Section.2.FFD using the S4 classes and methods.1}{FFD using the S4 classes and methods}{}
-\BOOKMARK [2][-]{Subsection.3.0.Specifying the survey parameters.2}{Specifying the survey parameters}{Section.2.FFD using the S4 classes and methods.1}
-\BOOKMARK [2][-]{Subsection.3.1.Individual sampling.2}{Individual sampling}{Section.2.FFD using the S4 classes and methods.1}
+\BOOKMARK [1][-]{Section.2.Sample size calculation using S4 classes.1}{Sample size calculation using S4 classes}{}
+\BOOKMARK [2][-]{Subsection.3.0.Specifying the survey parameters.2}{Specifying the survey parameters}{Section.2.Sample size calculation using S4 classes.1}
+\BOOKMARK [2][-]{Subsection.3.1.Individual sampling.2}{Individual sampling}{Section.2.Sample size calculation using S4 classes.1}
 \BOOKMARK [3][-]{Subsubsection.3.2.0.Cost optimization.3}{Cost optimization}{Subsection.3.1.Individual sampling.2}
 \BOOKMARK [3][-]{Subsubsection.3.2.1.Parameters for a fixed herd sensitivity.3}{Parameters for a fixed herd sensitivity}{Subsection.3.1.Individual sampling.2}
-\BOOKMARK [2][-]{Subsection.3.2.Limited sampling.2}{Limited sampling}{Section.2.FFD using the S4 classes and methods.1}
+\BOOKMARK [2][-]{Subsection.3.2.Limited sampling.2}{Limited sampling}{Section.2.Sample size calculation using S4 classes.1}
 \BOOKMARK [3][-]{Subsubsection.3.3.0.Cost optimization.3}{Cost optimization}{Subsection.3.2.Limited sampling.2}
 \BOOKMARK [3][-]{Subsubsection.3.3.1.Parameters for a fixed sample limit.3}{Parameters for a fixed sample limit}{Subsection.3.2.Limited sampling.2}
-\BOOKMARK [1][-]{Section.3.Using FFD without classes.1}{Using FFD without classes}{}
-\BOOKMARK [2][-]{Subsection.4.0.Individual sampling.2}{Individual sampling}{Section.3.Using FFD without classes.1}
-\BOOKMARK [2][-]{Subsection.4.1.Limited sampling.2}{Limited sampling}{Section.3.Using FFD without classes.1}
+\BOOKMARK [1][-]{Section.3.Sample size calculation without classes.1}{Sample size calculation without classes}{}
+\BOOKMARK [2][-]{Subsection.4.0.Individual sampling.2}{Individual sampling}{Section.3.Sample size calculation without classes.1}
+\BOOKMARK [2][-]{Subsection.4.1.Limited sampling.2}{Limited sampling}{Section.3.Sample size calculation without classes.1}
+\BOOKMARK [1][-]{Section.4.A-posteriori calculation of the alpha-error.1}{A-posteriori calculation of the alpha-error}{}
+\BOOKMARK [2][-]{Subsection.5.0.Computation of the a-posteriori alpha-error using FFD.2}{Computation of the a-posteriori alpha-error using FFD}{Section.4.A-posteriori calculation of the alpha-error.1}
+\BOOKMARK [2][-]{Subsection.5.1.Sampling using S4 classes.2}{Sampling using S4 classes}{Section.4.A-posteriori calculation of the alpha-error.1}

@@ -2,16 +2,18 @@
 
   \item \texttt{IndSamplingSummary}, \hyperpage{7}
   \item \texttt{IndSampling}, \hyperpage{9}
-  \item \texttt{LtdSamplingSummary}, \hyperpage{11}
+  \item \texttt{LtdSamplingSummary}, \hyperpage{10}
   \item \texttt{LtdSampling}, \hyperpage{12}
   \item \texttt{SurveyData}, \hyperpage{6}
+  \item \texttt{computeAlpha()}, \hyperpage{16}
   \item \texttt{computeAlphaLimitedSampling()}, \hyperpage{15}
+  \item \texttt{computeAposterioriError()}, \hyperpage{16}
   \item \texttt{computeOptimalSampleSize()}, \hyperpage{14}
   \item \texttt{computePValue()}, \hyperpage{13}
   \item \texttt{indSampling()}, \hyperpage{9}
   \item \texttt{indSamplingSummary()}, \hyperpage{7}
   \item \texttt{ltdSampling()}, \hyperpage{12}
-  \item \texttt{ltdSamplingSummary()}, \hyperpage{11}
+  \item \texttt{ltdSamplingSummary()}, \hyperpage{10}
   \item \texttt{surveyData()}, \hyperpage{6}
 
   \indexspace
@@ -19,7 +21,7 @@
   \item Class
     \subitem \texttt{IndSamplingSummary}, \hyperpage{7}
     \subitem \texttt{IndSampling}, \hyperpage{9}
-    \subitem \texttt{LtdSamplingSummary}, \hyperpage{11}
+    \subitem \texttt{LtdSamplingSummary}, \hyperpage{10}
     \subitem \texttt{LtdSampling}, \hyperpage{12}
     \subitem \texttt{SurveyData}, \hyperpage{6}
 
@@ -32,6 +34,8 @@
     \subitem \texttt{HTML-LtdSampling}, \hyperpage{12}
     \subitem \texttt{plot-IndSamplingSummary}, \hyperpage{8}
     \subitem \texttt{plot-LtdSamplingSummary}, \hyperpage{11}
+    \subitem \texttt{sample-IndSampling}, \hyperpage{17}
+    \subitem \texttt{sample-LtdSampling}, \hyperpage{17}
     \subitem \texttt{show-IndSamplingSummary}, \hyperpage{8}
     \subitem \texttt{show-IndSampling}, \hyperpage{9}
     \subitem \texttt{show-LtdSamplingSummary}, \hyperpage{11}

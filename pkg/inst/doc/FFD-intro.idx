@@ -16,9 +16,9 @@
 \indexentry{Method!\texttt{show-IndSampling}|hyperpage}{9}
 \indexentry{Method!\texttt{summary-IndSampling}|hyperpage}{9}
 \indexentry{Method!\texttt{HTML-IndSampling}|hyperpage}{9}
-\indexentry{Class!\texttt{LtdSamplingSummary}|hyperpage}{11}
-\indexentry{\texttt{LtdSamplingSummary}|hyperpage}{11}
-\indexentry{\texttt{ltdSamplingSummary()}|hyperpage}{11}
+\indexentry{Class!\texttt{LtdSamplingSummary}|hyperpage}{10}
+\indexentry{\texttt{LtdSamplingSummary}|hyperpage}{10}
+\indexentry{\texttt{ltdSamplingSummary()}|hyperpage}{10}
 \indexentry{Method!\texttt{summary-LtdSamplingSummary}|hyperpage}{11}
 \indexentry{Method!\texttt{show-LtdSamplingSummary}|hyperpage}{11}
 \indexentry{Method!\texttt{plot-LtdSamplingSummary}|hyperpage}{11}
@@ -32,3 +32,7 @@
 \indexentry{\texttt{computePValue()}|hyperpage}{13}
 \indexentry{\texttt{computeOptimalSampleSize()}|hyperpage}{14}
 \indexentry{\texttt{computeAlphaLimitedSampling()}|hyperpage}{15}
+\indexentry{\texttt{computeAposterioriError()}|hyperpage}{16}
+\indexentry{\texttt{computeAlpha()}|hyperpage}{16}
+\indexentry{Method!\texttt{sample-IndSampling}|hyperpage}{17}
+\indexentry{Method!\texttt{sample-LtdSampling}|hyperpage}{17}

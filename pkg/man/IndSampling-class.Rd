@@ -3,12 +3,13 @@
 \docType{class}
 \alias{IndSampling-class}
 \alias{HTML,IndSampling-method}
+\alias{sample,IndSampling-method}
 \alias{show,IndSampling-method}
 \alias{summary,IndSampling-method}
 
 \title{Class "IndSampling"}
 \description{
-Contains the parameters and the data necessery for a survey
+Contains the parameters and the data necessary for a survey
 to substantiate freedom from disease 
 using "individual sampling". Additionally to the survey
 parameters: design prevalence (=prevalence of the disease under
@@ -44,6 +45,15 @@ Objects can be created by calls of the form \code{new("IndSampling", ...)}.
 \section{Methods}{
   \describe{
     \item{HTML}{\code{signature(x = "IndSampling")}: Write object data summary into html-file.}
+    \item{sample}{\code{signature(x = "IndSampling")}: Sample herds using individual sampling. Additionally
+        to the argument \code{x} of type \code{IndSampling} the method takes an argument \code{size},
+        which is a character string. For \code{size == "fixed"} the fixed number of herds
+        given in \code{x@nHerds} is sampled using simple random sampling. For \code{size == "dynamic"} 
+        dynamic sampling is used, i.e., based on real-time computation of the a-posteriori alpha-
+        error the sample is updated until the a-posteriori alpha-error falls below the predefined
+        significance level x@alpha. The return value is a list with two items: \code{indexSample} is
+        a vector of indices of the sample corresponding to \code{x@surveyData@nAnimalVec} and 
+        \code{aPostAlpha} containing the a-posteriori alpha-error of the sample.}
     \item{show}{\code{signature(object = "IndSampling")}: Display structure of the class and content 
         of the slots.}
     \item{summary}{\code{signature(object = "IndSampling")}: Display structure of the class and a 
