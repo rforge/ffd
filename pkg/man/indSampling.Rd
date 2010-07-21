@@ -43,7 +43,7 @@ substantiate freedom from disease in large areas", Prev. Vet. Med. 52 (2002), pp
 Ian Kopacka <ian.kopacka@ages.at>
 }
 \seealso{
-See \code{\linkS4class{Indampling}} and \code{\linkS4class{SurveyData}} for additional details.
+See \code{\linkS4class{IndSampling}} and \code{\linkS4class{SurveyData}} for additional details.
 }
 \examples{
 data(sheepData)
