@@ -1013,9 +1013,11 @@ setMethod("HTML", signature(x = "IndSampling"),
 ##########################################################
 
 setMethod("sample", signature(x = "IndSampling"),
-    function(x, size, replace, prob){
-        ## Set default value for flag 'size':
+    function(x, size = c("fixed", "dynamic"), replace, prob){
+#    function(x, size, replace, prob){
+#        ## Set default value for flag 'size':
         if (missing(size)) size <- "fixed"
+        size <- match.arg(size)
         
         ## Sample with fixed sample size:
         if (size == "fixed"){ 

@@ -80,13 +80,13 @@ alpha-error}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section*{Note}
-
-The package is still in the pre-alpha phase of development. Not all 
-functionalities are implemented yet. This especially includes 
-methods for sampling using pre-fixed sample sizes, as well as 
-dynamic sampling based on realtime computation of a-posteriori 
-alpha-errors. These features will be included soon. 
+%\section*{Note}
+%
+%The package is still in the pre-alpha phase of development. Not all 
+%functionalities are implemented yet. This especially includes 
+%methods for sampling using pre-fixed sample sizes, as well as 
+%dynamic sampling based on realtime computation of a-posteriori 
+%alpha-errors. These features will be included soon. 
 
 
 \section{Introduction}
@@ -115,12 +115,13 @@ for those animals).
 The package \texttt{FFD} provides tools to compute the number of 
 herds, as well as the number of animals per herd that need to be 
 tested using two different sampling schemes that were established in 
-\cite{Ziller02}, \emph{individual sampling} and \emph{limited 
-sampling}. For the sampling scheme individual sampling the number of 
-animals that needs to be tested per herd depends on the herd size, 
-while limited sampling uses a pre-fixed number of animals, 
-irrespective of the herd size. The advantages and disadvantages of 
-the two sampling schemes will be discussed in the sections below.  
+\cite{Ziller02}. These schemes are known as \emph{individual 
+sampling} and \emph{limited sampling}. For individual sampling the 
+number of animals that needs to be tested per herd depends on the 
+herd size, while limited sampling uses a pre-fixed number of 
+animals, irrespective of the herd size. The advantages and 
+disadvantages of the two sampling schemes will be discussed in the 
+sections below.  
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -819,7 +820,7 @@ bound, i.e., for each herd the number of animals to test is computed
 as the smallest number that achieves a herd sensitivity greater or 
 equal to the desired value. E.g., for a herd of a given size the 
 herd sensitivity when testing 4 animals might be 0.68 and for 5 
-animals it might be 0.74. If the desired herd sensitivtiy is 0.7 
+animals it might be 0.74. If the desired herd sensitivity is 0.7 
 then 5 animals would be tested. The mean herd sensitivity for 
 individual sampling therefore always exceeds the desired value, 
 hence the number of herds to test is generally higher than 
@@ -832,9 +833,8 @@ during the sampling procedure and updates the sample size
 automatically in order to prevent under- or overestimation of the 
 sample size. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Computation of the a-posteriori alpha-error using 
-\texttt{FFD}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsection{Computation of the a-posteriori alpha-error using FFD} 
 
 The a-posteriori error of a given sample can be computed using the 
 function \texttt{computeAposterioriError()}. 
@@ -842,6 +842,36 @@ function \texttt{computeAposterioriError()}.
 population size, the number of diseased elements in the population 
 according to the design prevalence and a vector of the herd-level 
 alpha-errors of the herds in the sample (= 1 - herd sensitivity). 
+Furthermore it can be specified if the a-posteriori error should be 
+computed exactly or if an approximation should be used. The exact 
+calculation is computationally costly due to combinatorial issues 
+and is not recommended if there are more than 6 diseased elements in 
+the population. The approximation comes very close to the exact 
+value and is significantly more efficient. 
+
+The vector of herd-level alpha-errors can be generated using the 
+function \texttt{computeAlpha()}. \index{\texttt{computeAlpha()}} It 
+takes the vector of herd sizes, the intra herd prevalence, the 
+sensitivity of the diagnostic test as arguments, as well as 
+parameters concerning the sample strategy: for \texttt{method == 
+"limited"} the sample limit \texttt{sampleSizeLtd} must be 
+specified, for \texttt{method == "individual"} the herd sensitivity 
+\texttt{herdSensitivity} must be specified:
+
+<<>>=
+sampleVec <- sample(sheepData$nSheep, 2550, replace = FALSE)
+alphaVec <- computeAlpha(nAnimalVec = sampleVec,
+   method = "limited", sampleSizeLtd = 9,
+   intraHerdPrevalence = 0.2, diagSensitivity = 0.9)
+system.time({
+errorExact <- computeAposterioriError(alphaErrorVector = alphaVec, 
+    nPopulation = 5000, nDiseased = 5, method = "exact")})
+errorExact    
+system.time({
+errorApprox <- computeAposterioriError(alphaErrorVector = alphaVec, 
+    nPopulation = 5000, nDiseased = 5, method = "approx")})
+errorApprox
+@ 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -883,7 +913,7 @@ sampleDynamic$aPostAlpha
   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\tableofcontents
+%\tableofcontents
 
 \printindex
 

@@ -107,12 +107,13 @@ for those animals).
 The package \texttt{FFD} provides tools to compute the number of 
 herds, as well as the number of animals per herd that need to be 
 tested using two different sampling schemes that were established in 
-\cite{Ziller02}, \emph{individual sampling} and \emph{limited 
-sampling}. For the sampling scheme individual sampling the number of 
-animals that needs to be tested per herd depends on the herd size, 
-while limited sampling uses a pre-fixed number of animals, 
-irrespective of the herd size. The advantages and disadvantages of 
-the two sampling schemes will be discussed in the sections below.  
+\cite{Ziller02}. These schemes are known as \emph{individual 
+sampling} and \emph{limited sampling}. For individual sampling the 
+number of animals that needs to be tested per herd depends on the 
+herd size, while limited sampling uses a pre-fixed number of 
+animals, irrespective of the herd size. The advantages and 
+disadvantages of the two sampling schemes will be discussed in the 
+sections below.  
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -123,40 +124,40 @@ the two sampling schemes will be discussed in the sections below.
 \label{sec:2-stage-sampling} 
 
 A survey to substantiate freedom from disease can be regarded as a 
-test that is being applied to a whole population. Just like for a 
-diagnostic test sensitivity and specificity can be determined for 
+test that is being applied to an entire population. As for a 
+diagnostic test, sensitivity and specificity can be determined for 
 the survey. The sensitivity of a test is defined as the probability 
-of achieving a positive test result, given the true disease status 
-of the tested individual is positive (individual is sick). 
+of achieving a positive test result, given that the true disease 
+status of the tested individual is positive (individual is sick). 
 Analogously the specificity of a test is the probability of 
-achieving a negative test result, given the true disease status of 
-the tested individual is negative (individual is healthy). 
+achieving a negative test result, given that the true disease status 
+of the tested individual is negative (individual is healthy). 
 
 A typical requirement of a trading partner might be that one must 
-use a survey to show with a probability exceeding 95~\% that no more 
-than 0.2~\% of the population is diseased. The probability of 
-establishing a prevalence of 0.2~\% or lower reflects the 
-uncertainty that is always present due to sampling of a 
-subpopulation only and imperfect tests. This percentage is often 
-referred to as the \emph{confidence}, while the compliment 
-(1-confidence) is referred to as the \emph{significance} $\alpha$. 
-In our case $\alpha = 0.05$. The prevalence limit is often referred 
-to as the \emph{design prevalence}.
+show with a probability exceeding 95~\% that no more than 0.2~\% of 
+the population is diseased. The probability of establishing a 
+prevalence of 0.2~\% or lower reflects the uncertainty that is 
+always present due to sampling of a subpopulation only and imperfect 
+tests. This percentage is often referred to as the 
+\emph{confidence}, while the compliment (1-confidence) is referred 
+to as the \emph{significance} $\alpha$. In our case $\alpha = 0.05$. 
+The prevalence limit is often referred to as the \emph{design 
+prevalence}. 
 
 Now let's look at the survey in the context of sensitivity and 
 specificity. The confidence of our survey is the probability of 
 finding the disease in a diseased population, i.e., the confidence 
 can be regarded as the overall sensitivity of the (statistical) 
-test. The specificity of the test is the probability of  classifying 
+test. The specificity of the test is the probability of classifying 
 a population as free from the disease, given the population is truly 
-free and is related to the \emph{power} $(1-\beta)$ of the test. In 
-surveys substantiating freedom from disease a common assumption is 
-the perfect specificity, i.e., that there are no false positives. 
-This assumption simplifies the computation and is also theoretically 
-founded. A positive result can have undesired economical 
-implications. It can therefore be assumed that all positive results 
-are thoroughly checked using multiple tests in order to rule out 
-false positive results.  
+free. This parameter is related to the \emph{power} $(1-\beta)$ of 
+the test. In surveys substantiating freedom from disease a common 
+assumption is that of perfect specificity, i.e., that there are no 
+false positives. This assumption on the one hand simplifies the 
+computation but it is also practically founded. A positive result 
+can have undesired economical implications. It can therefore be 
+assumed that all positive results are thoroughly checked using 
+multiple tests in order to rule out false positive results.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1073,7 +1074,7 @@ specified, for \texttt{method == "individual"} the herd sensitivity
 \end{Sinput}
 \begin{Soutput}
    user  system elapsed 
-   0.34    0.00    0.35 
+   0.33    0.00    0.33 
 \end{Soutput}
 \begin{Sinput}
 > errorExact    
