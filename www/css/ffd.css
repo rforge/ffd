@@ -5,11 +5,19 @@ BODY {
   margin-bottom: 1em;
   color: rgb(68, 68, 68);
   background-color: white;
-  font-family: arial, helvetica, sans-serif;
-  font-size: small;
+  font-family: arial, helvetica, sans-serif;    
   padding: 5px;
   border: 0px;
 }
+
+p {
+  font-size: small;
+}
+
+ul{
+  font-size: small;
+}
+
 
 
 form { margin: 0; }
