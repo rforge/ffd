@@ -9,18 +9,19 @@
         <title>
             R-Package: FFD - Freedom From Disease
         </title>
-        <link rel=stylesheet type="text/css" href="css/ffd.css">
+        <link rel="stylesheet" type="text/css" href="css/ffd.css" />
 
 
     </head>
     <body>
 
 <!-- R-Forge Logo -->
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-<tr><td>
-<a href="https://r-forge.r-project.org/"><img src="https://r-forge.r-project.org/themes/rforge/imagesrf/logo.png" border="0" alt="R-Forge Logo" /> </a> </td> </tr>
-</table>
-<br>
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr><td>
+                <a href="https://r-forge.r-project.org/"><img src="https://r-forge.r-project.org/themes/rforge/imagesrf/logo.png" border="0" alt="R-Forge Logo" /> </a>
+            </td> </tr>
+        </table>
+        <br/>
 
 
         <h1>
@@ -31,16 +32,16 @@
         </h2>
 
         <p>
-        In practise, when conducting surveys to substantiate freedom from disease in large populations two-stage sampling strategies are often used in order to account for herd-level clustering of diseases. With two-stage sampling the questions that need to be addressed are a) how many herds need to be sampled and b) how many animals per herd need to be tested. Using a modified hypergeometric formula the optimal sample sizes can elegantly be computed, while incorporating imperfect diagnostic tests and finite populations; see Cameron and Baldock (1998a,b).
+            In practise, when conducting surveys to substantiate freedom from disease in large populations two-stage sampling strategies are often used in order to account for herd-level clustering of diseases. With two-stage sampling the questions that need to be addressed are a) how many herds need to be sampled and b) how many animals per herd need to be tested. Using a modified hypergeometric formula the optimal sample sizes can elegantly be computed, while incorporating imperfect diagnostic tests and finite populations; see Cameron and Baldock (1998a,b).
         </p>
 
-       <p>
-       In the package FFD, tools for calculating optimal sample sizes (on animal and herd level) using sampling strategies "individual sampling" or "limited sampling" (see Ziller, Selhorst, Teuffert, Kramer, and Schl&uuml;ter (2002)) are implemented. The idea behind individual sampling is that the number of animals to test is computed for each herd size in order to guarantee a certain herd sensitivity independent of the herd size. With limited sampling a pre-fixed number of animals is tested for each herd (=sample limit), irrespective of the herd size. Using FFD cost optimal sampling strategies can be determined finding the optimal herd sensitivity or sample limit, respectively.
-       </p>
+        <p>
+            In the package FFD, tools for calculating optimal sample sizes (on animal and herd level) using sampling strategies "individual sampling" or "limited sampling" (see Ziller, Selhorst, Teuffert, Kramer, and Schl&uuml;ter (2002)) are implemented. The idea behind individual sampling is that the number of animals to test is computed for each herd size in order to guarantee a certain herd sensitivity independent of the herd size. With limited sampling a pre-fixed number of animals is tested for each herd (=sample limit), irrespective of the herd size. Using FFD cost optimal sampling strategies can be determined finding the optimal herd sensitivity or sample limit, respectively.
+        </p>
 
-       <p>
-The package provides S4-classes and methods for convenient handling, as well as conventional functions in order to guarantee maximum flexibility.
-       </p>
+        <p>
+            The package provides S4-classes and methods for convenient handling, as well as conventional functions in order to guarantee maximum flexibility.
+        </p>
 
 
         <h2>
@@ -64,55 +65,58 @@ The package provides S4-classes and methods for convenient handling, as well as 
             Example
         </h2>
         <p>
-        A simple example using simulated data of 15287 sheep holdings. 
-        For survey parameters design prevalence = 0.2%, significance level = 5%, intra herd 
-        prevalence = 20%, sensitivity of the diagnostic test = 90% and cost per tested 
-        animal = 7 euro, cost per tested herd = 30 euro (excluding the costs for the 
-        diagnostic tests) diagnostics are run in order to find the cost-optimal sample size 
+        A simple example using simulated data of 15287 sheep holdings.
+        For survey parameters design prevalence = 0.2%, significance level = 5%, intra herd
+        prevalence = 20%, sensitivity of the diagnostic test = 90% and cost per tested
+        animal = 7 euro, cost per tested herd = 30 euro (excluding the costs for the
+        diagnostic tests) diagnostics are run in order to find the cost-optimal sample size
         for limited sampling. Click on image for full-size view.
         </p>
-        <table border="0" width="90%" align="center" cellspacing = 10>
-            <tr valign="center">
+        <table border="0" width="90%" align="center" cellspacing = "10">
+            <tr valign="middle">
                 <td>
-                    <b>
-<pre>
+
+                    <pre>
+                        <b>
 &gt; ## Load library and read data
 &gt; library("FFD")
 &gt; data(sheepData)
 
 &gt; ## Specify the survey parameters:
-&gt; mySurveyData <- surveyData(nAnimalVec = sheepData$nSheep,
+&gt; mySurveyData &lt;- surveyData(nAnimalVec = sheepData$nSheep,
 +    populationData = sheepData, designPrevalence = 0.002,
 +    alpha = 0.05, intraHerdPrevalence = 0.2,
 +    diagSensitivity = 0.9, costHerd = 30, costAnimal = 7)
 
 &gt; ## Diagnostics for limited sampling:
-&gt; myLtdSampleSummary <- ltdSamplingSummary(survey.Data = mySurvey,
+&gt; myLtdSampleSummary &lt;- ltdSamplingSummary(survey.Data = mySurvey,
 +    sampleSizeLtdMax = 30)
 &gt; plot(myLtdSampleSummary)
+                        </b>
+                    </pre>
 
-</pre> 
-                    </b>
                 </td>
                 <td>
-                    	<a href="ffd-002.png"><img src="ffd-001.png"/></a>
+                    	<a href="ffd-002.png"><img src="ffd-001.png" alt ="Limited sampling graphic" /></a>
                 </td>
             </tr>
         </table>
-        
-        
-        
 
-        
-        
+
+
+
+
+
         <h2>
             Package Installation
-        </h2>        
+        </h2>
         <p>
-        To install this package directly within R type: <b><pre>install.packages("FFD", repos="http://R-Forge.R-project.org")</pre></b>
-        </p>        
+            To install this package directly within R type:
+        </p>
+        <pre><b>install.packages("FFD", repos="http://R-Forge.R-project.org")</b></pre>
+
         <p>
-        or download source code or binary from <a href="https://r-forge.r-project.org/R/?group_id=836">R-Forge</a>.  
+            or download source code or binary from <a href="https://r-forge.r-project.org/R/?group_id=836">R-Forge</a>.
         </p>
 
         <h2>
@@ -122,7 +126,7 @@ The package provides S4-classes and methods for convenient handling, as well as 
             <li> Download source code/binary from <a href="https://r-forge.r-project.org/R/?group_id=836">R-Forge</a>  </li>
             <li> Package vignette [<a href="FFD-intro.pdf">pdf</a>]  </li>
         </ul>
-        
+
         <h2>
             References
         </h2>
@@ -134,9 +138,8 @@ The package provides S4-classes and methods for convenient handling, as well as 
             <li> Ziller M., Selhorst T., Teuffert J., Kramer M., Schl&uuml;ter H. (2002). <i>"Analysis of sampling strategies
             to substantiate freedom from disease in large areas"</i>, Preventive Veterinary Medicine, 52, 333-343. </li>
         </ul>
-        
-        
-        
-    <br>    
+
+    <br />
+
     </body>
 </html> 
