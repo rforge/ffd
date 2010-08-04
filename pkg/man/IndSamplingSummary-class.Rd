@@ -40,7 +40,11 @@ Objects can be created by calls of the form \code{new("IndSamplingSummary", ...)
 }
 \section{Methods}{
   \describe{
-    \item{HTML}{\code{signature(x = "IndSamplingSummary")}: Write object data summary into html-file.}
+    \item{HTML}{\code{signature(x = "IndSamplingSummary")}: Creates an html file containing the 
+        summary data and the diagnostic plots. Title, file name, output directory, css-file,
+        etc. can additionally be specified using the parameters, \code{filename}, \code{outdir},
+        \code{CSSFile}, \code{Title}, as well as all the other parameters of 
+        the R2HTML-function \code{HTMLInitFile}.}
     \item{plot}{\code{signature(x = "IndSamplingSummary")}: Create plots of 1) the mean number of animals
         to be tested per herd, 2) the number of herds to be tested, 3) the expected total number of 
         animals to be tested, 4) the expected total cost of the survey plotted against the vector 

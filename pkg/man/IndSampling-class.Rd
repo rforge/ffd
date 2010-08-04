@@ -44,8 +44,13 @@ Objects can be created by calls of the form \code{new("IndSampling", ...)}.
 }
 \section{Methods}{
   \describe{
-    \item{HTML}{\code{signature(x = "IndSampling")}: Write object data summary into html-file.}
-    \item{sample}{\code{signature(x = "IndSampling")}: Sample herds using individual sampling. Additionally
+    \item{HTML}{\code{signature(x = "IndSampling")}: Creates an html file containing the 
+        summary data and the diagnostic plots. Title, file name, output directory, css-file,
+        etc. can additionally be specified using the parameters, \code{filename}, \code{outdir},
+        \code{CSSFile}, \code{Title}, as well as all the other parameters of 
+        the R2HTML-function \code{HTMLInitFile}.}
+    \item{sample}{\code{signature(x = "IndSampling", size = c("fixed", "dynamic"))}: Sample herds 
+        using individual sampling. Additionally
         to the argument \code{x} of type \code{IndSampling} the method takes an argument \code{size},
         which is a character string. For \code{size == "fixed"} the fixed number of herds
         given in \code{x@nHerds} is sampled using simple random sampling. For \code{size == "dynamic"} 

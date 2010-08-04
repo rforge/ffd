@@ -52,8 +52,12 @@ computed using \texttt{FFD}. The package furthermore includes tools
 for evaluating the a-posteriori significance ($=1-\alpha$) 
 corresponding to a specific sample of herds.} 
 
-\Keywords{\proglang{R}}
-\Plainkeywords{R}
+\Keywords{\proglang{R}, freedom from disease, sample size 
+calculation, individual sampling, limited sampling, a-posteriori 
+alpha-error} 
+\Plainkeywords{R, freedom from disease, sample size 
+calculation, individual sampling, limited sampling, a-posteriori 
+alpha-error} 
 
 %%\usepackage{Sweave} %% already provided by jss.cls
 %%\VignetteIndexEntry{FFD: Package to substantiate freedom from disease in R}
@@ -68,13 +72,13 @@ corresponding to a specific sample of herds.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section*{Note}
-
-The package is still in the pre-alpha phase of development. Not all 
-functionalities are implemented yet. This especially includes 
-methods for sampling using pre-fixed sample sizes, as well as 
-dynamic sampling based on realtime computation of a-posteriori 
-alpha-errors. These features will be included soon. 
+%\section*{Note}
+%
+%The package is still in the pre-alpha phase of development. Not all 
+%functionalities are implemented yet. This especially includes 
+%methods for sampling using pre-fixed sample sizes, as well as 
+%dynamic sampling based on realtime computation of a-posteriori 
+%alpha-errors. These features will be included soon. 
 
 
 \section{Introduction}
@@ -103,12 +107,13 @@ for those animals).
 The package \texttt{FFD} provides tools to compute the number of 
 herds, as well as the number of animals per herd that need to be 
 tested using two different sampling schemes that were established in 
-\cite{Ziller02}, \emph{individual sampling} and \emph{limited 
-sampling}. For the sampling scheme individual sampling the number of 
-animals that needs to be tested per herd depends on the herd size, 
-while limited sampling uses a pre-fixed number of animals, 
-irrespective of the herd size. The advantages and disadvantages of 
-the two sampling schemes will be discussed in the sections below.  
+\cite{Ziller02}. These schemes are known as \emph{individual 
+sampling} and \emph{limited sampling}. For individual sampling the 
+number of animals that needs to be tested per herd depends on the 
+herd size, while limited sampling uses a pre-fixed number of 
+animals, irrespective of the herd size. The advantages and 
+disadvantages of the two sampling schemes will be discussed in the 
+sections below.  
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -119,40 +124,40 @@ the two sampling schemes will be discussed in the sections below.
 \label{sec:2-stage-sampling} 
 
 A survey to substantiate freedom from disease can be regarded as a 
-test that is being applied to a whole population. Just like for a 
-diagnostic test sensitivity and specificity can be determined for 
+test that is being applied to an entire population. As for a 
+diagnostic test, sensitivity and specificity can be determined for 
 the survey. The sensitivity of a test is defined as the probability 
-of achieving a positive test result, given the true disease status 
-of the tested individual is positive (individual is sick). 
+of achieving a positive test result, given that the true disease 
+status of the tested individual is positive (individual is sick). 
 Analogously the specificity of a test is the probability of 
-achieving a negative test result, given the true disease status of 
-the tested individual is negative (individual is healthy). 
+achieving a negative test result, given that the true disease status 
+of the tested individual is negative (individual is healthy). 
 
 A typical requirement of a trading partner might be that one must 
-use a survey to show with a probability exceeding 95~\% that no more 
-than 0.2~\% of the population is diseased. The probability of 
-establishing a prevalence of 0.2~\% or lower reflects the 
-uncertainty that is always present due to sampling of a 
-subpopulation only and imperfect tests. This percentage is often 
-referred to as the \emph{confidence}, while the compliment 
-(1-confidence) is referred to as the \emph{significance} $\alpha$. 
-In our case $\alpha = 0.05$. The prevalence limit is often referred 
-to as the \emph{design prevalence}.
+show with a probability exceeding 95~\% that no more than 0.2~\% of 
+the population is diseased. The probability of establishing a 
+prevalence of 0.2~\% or lower reflects the uncertainty that is 
+always present due to sampling of a subpopulation only and imperfect 
+tests. This percentage is often referred to as the 
+\emph{confidence}, while the compliment (1-confidence) is referred 
+to as the \emph{significance} $\alpha$. In our case $\alpha = 0.05$. 
+The prevalence limit is often referred to as the \emph{design 
+prevalence}. 
 
 Now let's look at the survey in the context of sensitivity and 
 specificity. The confidence of our survey is the probability of 
 finding the disease in a diseased population, i.e., the confidence 
 can be regarded as the overall sensitivity of the (statistical) 
-test. The specificity of the test is the probability of  classifying 
+test. The specificity of the test is the probability of classifying 
 a population as free from the disease, given the population is truly 
-free and is related to the \emph{power} $(1-\beta)$ of the test. In 
-surveys substantiating freedom from disease a common assumption is 
-the perfect specificity, i.e., that there are no false positives. 
-This assumption simplifies the computation and is also theoretically 
-founded. A positive result can have undesired economical 
-implications. It can therefore be assumed that all positive results 
-are thoroughly checked using multiple tests in order to rule out 
-false positive results.  
+free. This parameter is related to the \emph{power} $(1-\beta)$ of 
+the test. In surveys substantiating freedom from disease a common 
+assumption is that of perfect specificity, i.e., that there are no 
+false positives. This assumption on the one hand simplifies the 
+computation but it is also practically founded. A positive result 
+can have undesired economical implications. It can therefore be 
+assumed that all positive results are thoroughly checked using 
+multiple tests in order to rule out false positive results.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -442,9 +447,9 @@ simulated data resembling the sheep holdings in Austria.
 \begin{Sinput}
 > data(sheepData) 
 > mySurvey <- surveyData(nAnimalVec = sheepData$nSheep, 
-+      populationData = sheepData, designPrevalence = 0.002, 
-+      alpha = 0.05, intraHerdPrevalence = 0.2, 
-+      diagSensitivity = 0.9, costHerd = 30, costAnimal = 7) 
+       populationData = sheepData, designPrevalence = 0.002, 
+       alpha = 0.05, intraHerdPrevalence = 0.2, 
+       diagSensitivity = 0.9, costHerd = 30, costAnimal = 7) 
 > summary(mySurvey)    
 \end{Sinput}
 \begin{Soutput}
@@ -518,7 +523,7 @@ specified by the user or a default value of 0.02 is used.
 \begin{Schunk}
 \begin{Sinput}
 > myIndSamplingSummary <- indSamplingSummary(survey.Data = mySurvey, 
-+      stepSize = 0.05)
+       stepSize = 0.05)
 > summary(myIndSamplingSummary)
 \end{Sinput}
 \begin{Soutput}
@@ -613,7 +618,7 @@ For a herd sensitivity of 0.7 the parameters are:
 \begin{Schunk}
 \begin{Sinput}
 > myIndSampling <- indSampling(survey.Data = mySurvey, 
-+      herdSensitivity = 0.7)
+       herdSensitivity = 0.7)
 > summary(myIndSampling) 
 \end{Sinput}
 \begin{Soutput}
@@ -693,7 +698,7 @@ largest herd size is used.
 \begin{Schunk}
 \begin{Sinput}
 > myLtdSampleSummary = ltdSamplingSummary(survey.Data = mySurvey,
-+      sampleSizeLtdMax = 30)
+       sampleSizeLtdMax = 30)
 > summary(myLtdSampleSummary)
 \end{Sinput}
 \begin{Soutput}
@@ -788,7 +793,7 @@ animals per herd:
 \begin{Schunk}
 \begin{Sinput}
 > myLtdSampling <- ltdSampling(survey.Data = mySurvey, 
-+      sampleSizeLtd = 7)
+       sampleSizeLtd = 7)
 > summary(myLtdSampling) 
 \end{Sinput}
 \begin{Soutput}
@@ -850,7 +855,7 @@ with the design prevalence:
 \begin{Schunk}
 \begin{Sinput}
 > p.value <- computePValue(nPopulation = 15287, nSample = 1630, 
-+      nDiseased = round(15287*0.002), sensitivity = 0.8633, specificity = 1)
+       nDiseased = round(15287*0.002), sensitivity = 0.8633, specificity = 1)
 > p.value
 \end{Sinput}
 \begin{Soutput}
@@ -872,8 +877,8 @@ returns the optimal sample size:
 \begin{Schunk}
 \begin{Sinput}
 > nSample <- computeOptimalSampleSize(nPopulation = 15287, 
-+      prevalence = 0.002, alpha = 0.05, sensitivity = 0.8633, 
-+      specificity = 1, lookupTable = FALSE)
+       prevalence = 0.002, alpha = 0.05, sensitivity = 0.8633, 
+       specificity = 1, lookupTable = FALSE)
 > nSample 
 \end{Sinput}
 \begin{Soutput}
@@ -909,8 +914,8 @@ maximal herd size that should be included in the  lookup table
 \begin{Schunk}
 \begin{Sinput}
 > lookupTable <- computeOptimalSampleSize(nPopulation = max(sheepData$nSheep), 
-+      prevalence = 0.2, alpha = 0.3, sensitivity = 0.9, 
-+      specificity = 1, lookupTable = TRUE)
+       prevalence = 0.2, alpha = 0.3, sensitivity = 0.9, 
+       specificity = 1, lookupTable = TRUE)
 > lookupTable 
 \end{Sinput}
 \begin{Soutput}
@@ -949,8 +954,8 @@ the herd size distribution in the population:
 \begin{Schunk}
 \begin{Sinput}
 > alphaList <- computeAlphaLimitedSampling(stockSizeVector = sheepData$nSheep, 
-+      sampleSizeLtd = 7, intraHerdPrevalence = 0.2, diagSensitivity = 0.9, 
-+      diagSpecificity = 1)
+       sampleSizeLtd = 7, intraHerdPrevalence = 0.2, diagSensitivity = 0.9, 
+       diagSpecificity = 1)
 > str(alphaList$alphaDataFrame) 
 \end{Sinput}
 \begin{Soutput}
@@ -983,10 +988,203 @@ significance level (\texttt{alpha}), the mean herd sensitivity = 1 -
 \section{A-posteriori calculation of the alpha-error}
 \label{sec:aposteriori}
 
+The calculation of the sample size on herd level, i.e., the number 
+of herds to test is based on the herd sensitivity. For limited 
+sampling the herd sensitivity depends on the size of each herd, 
+hence a mean herd sensitivity is used for the sample size 
+calculation. This, on the other hand, means that the overall 
+significance level of the scheme depends on the chosen sample, i.e., 
+if the sample contains a high proportion of very large herds the 
+mean herd sensitivity in the sample is lower than the mean herd 
+sensitivity in the population and hence the desired overall 
+significance level is not met. If the sample contains a lot of very 
+small herds, then the mean herd sensitivity in the sample exceeds 
+that of the population and the significance of the sampling scheme 
+falls below the desired significance level, i.e., the sampling 
+scheme is ``too thorough'', more herds are being tested than 
+necessary. 
+
+It is therefore of interest to compute the significance level of the 
+sampling scheme after the sample has been drawn, i.e., to compute 
+the a-posteriori alpha-error, which is the probability of finding no 
+testpositives in the \textbf{given sample}, given that the disease 
+is present at the design prevalence. The a-posteriori alpha-error 
+can then be used to assess a given sample and to possibly modify it, 
+i.e., reduce or extend it in order to meet the prescribed 
+significance level. 
+
+The a-posteriori analysis of the alpha-error is also of interest 
+when using individual sampling. With individual sampling the number 
+of animals to test is computed for every herd size, in order to 
+guarantee the ``same'' herd sensitivity for every herd. The herd 
+sensitivity as a function of the number of animals tested is however 
+a discrete function with jumps. The exact value can in most cases 
+not be achieved and the desired herd sensitivity is taken as a lower 
+bound, i.e., for each herd the number of animals to test is computed 
+as the smallest number that achieves a herd sensitivity greater or 
+equal to the desired value. E.g., for a herd of a given size the 
+herd sensitivity when testing 4 animals might be 0.68 and for 5 
+animals it might be 0.74. If the desired herd sensitivity is 0.7 
+then 5 animals would be tested. The mean herd sensitivity for 
+individual sampling therefore always exceeds the desired value, 
+hence the number of herds to test is generally higher than 
+necessary. 
+
+The package \texttt{FFD} offers tools to compute the a-posteriori 
+alpha-error for a given sample. Furthermore a sampling scheme is 
+implemented that dynamically updates the a-posteriori alpha-error 
+during the sampling procedure and updates the sample size 
+automatically in order to prevent under- or overestimation of the 
+sample size. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsection{Computation of the a-posteriori alpha-error using FFD} 
+
+The a-posteriori error of a given sample can be computed using the 
+function \texttt{computeAposterioriError()}. 
+\index{\texttt{computeAposterioriError()}} The function requires the 
+population size, the number of diseased elements in the population 
+according to the design prevalence and a vector of the herd-level 
+alpha-errors of the herds in the sample (= 1 - herd sensitivity). 
+Furthermore it can be specified if the a-posteriori error should be 
+computed exactly or if an approximation should be used. The exact 
+calculation is computationally costly due to combinatorial issues 
+and is not recommended if there are more than 6 diseased elements in 
+the population. The approximation comes very close to the exact 
+value and is significantly more efficient. 
+
+The vector of herd-level alpha-errors can be generated using the 
+function \texttt{computeAlpha()}. \index{\texttt{computeAlpha()}} It 
+takes the vector of herd sizes, the intra herd prevalence, the 
+sensitivity of the diagnostic test as arguments, as well as 
+parameters concerning the sample strategy: for \texttt{method == 
+"limited"} the sample limit \texttt{sampleSizeLtd} must be 
+specified, for \texttt{method == "individual"} the herd sensitivity 
+\texttt{herdSensitivity} must be specified:
+
+\begin{Schunk}
+\begin{Sinput}
+> sampleVec <- sample(sheepData$nSheep, 2550, replace = FALSE)
+> alphaVec <- computeAlpha(nAnimalVec = sampleVec,
+      method = "limited", sampleSizeLtd = 9,
+      intraHerdPrevalence = 0.2, diagSensitivity = 0.9)
+> system.time({
+   errorExact <- computeAposterioriError(alphaErrorVector = alphaVec, 
+       nPopulation = 5000, nDiseased = 5, method = "exact")})
+\end{Sinput}
+\begin{Soutput}
+   user  system elapsed 
+   0.33    0.00    0.32 
+\end{Soutput}
+\begin{Sinput}
+> errorExact    
+\end{Sinput}
+\begin{Soutput}
+[1] 0.04461766
+\end{Soutput}
+\begin{Sinput}
+> system.time({
+   errorApprox <- computeAposterioriError(alphaErrorVector = alphaVec, 
+       nPopulation = 5000, nDiseased = 5, method = "approx")})
+\end{Sinput}
+\begin{Soutput}
+   user  system elapsed 
+      0       0       0 
+\end{Soutput}
+\begin{Sinput}
+> errorApprox
+\end{Sinput}
+\begin{Soutput}
+[1] 0.04461784
+\end{Soutput}
+\end{Schunk}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\tableofcontents
+
+\subsection{Sampling using S4 classes} 
+\label{subsec:sampling_with_class}
+
+The method \texttt{sample()} 
+\index{Method!\texttt{sample-IndSampling}}\index{Method!\texttt{sample-LtdSampling}} 
+has been implemented for the classes \texttt{IndSampling} and 
+\texttt{IndSampling}. It takes two arguments, the first argument 
+\texttt{x} is an object of the class \texttt{IndSampling} or 
+\texttt{LtdSampling} and the second argument \texttt{size} is a 
+character string specifying the sampling strategy. For \texttt{size 
+= "fixed"} the fixed number \texttt{x@nHerds} of herds is sampled 
+using simple random sampling. For \texttt{size = "dynamic"} dynamic 
+sampling is used. The method returns a list with two items: a vector 
+of indices of the sampled herds corresponding to 
+\texttt{x@surveyData@nAnimalVec} and the a-posteriori alpha-error of 
+the sample:
+
+\begin{Schunk}
+\begin{Sinput}
+> ## Fixed sampling:
+> ##################
+> sampleFixed <- sample(x = myIndSampling, size = "fixed")
+> ## Sample Size:
+> length(sampleFixed$indexSample)
+\end{Sinput}
+\begin{Soutput}
+[1] 2011
+\end{Soutput}
+\begin{Sinput}
+> ## Significance:
+> sampleFixed$aPostAlpha
+\end{Sinput}
+\begin{Soutput}
+[1] 0.03027402
+\end{Soutput}
+\begin{Sinput}
+> ## Sample:
+> head(sampleFixed$sample)
+\end{Sinput}
+\begin{Soutput}
+   herdId state nSheep
+2       2     7     30
+4       4     3     11
+6       6     7      3
+20     20     6      3
+27     27     7     10
+45     45     3      8
+\end{Soutput}
+\begin{Sinput}
+> ## Dynamic sampling:
+> ####################
+> sampleDynamic <- sample(x = myIndSampling, size = "dynamic")
+> ## Sample Size:
+> length(sampleDynamic$indexSample)
+\end{Sinput}
+\begin{Soutput}
+[1] 1741
+\end{Soutput}
+\begin{Sinput}
+> ## Significance:
+> sampleDynamic$aPostAlpha
+\end{Sinput}
+\begin{Soutput}
+[1] 0.04998022
+\end{Soutput}
+\begin{Sinput}
+> ## Sample:
+> head(sampleFixed$sample)
+\end{Sinput}
+\begin{Soutput}
+   herdId state nSheep
+2       2     7     30
+4       4     3     11
+6       6     7      3
+20     20     6      3
+27     27     7     10
+45     45     3      8
+\end{Soutput}
+\end{Schunk}
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tableofcontents
 
 \printindex
 

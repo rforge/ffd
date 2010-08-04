@@ -3,6 +3,7 @@
 \alias{computeSampleSizeInd}
 \alias{ltdSampling.internal}
 \alias{indSampling.internal}
+\alias{createStyleFile}
 \title{Internal FFD functions}
 \description{
   Internal FFD functions, methods and classes.

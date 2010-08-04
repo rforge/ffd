@@ -1,7 +1,7 @@
 useDynLib(FFD)
 
 import(methods)
-importFrom(R2HTML, HTML, HTMLInitFile, HTMLEndFile)
+import(R2HTML)
 importFrom(graphics,plot)
 
 exportClasses(

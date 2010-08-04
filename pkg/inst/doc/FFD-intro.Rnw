@@ -529,17 +529,20 @@ plot(myIndSamplingSummary)
 
 The summary of the object of class \texttt{IndSamplingSummary} can
 further be exported to an html-file using the method \texttt{HTML}.
-\index{Method!\texttt{HTML-IndSamplingSummary}} This requires the
-specification of a file to write to, which can be done using the
-function \texttt{HTMLInitFile()} from the package \texttt{R2HTML}.
+\index{Method!\texttt{HTML-IndSamplingSummary}} This method creates 
+an html-file and a css-file containing the the data in the 
+\texttt{IndSamplingSummary} object, as well as the diagnostic plots.
 
 \begin{Schunk}
 \begin{Sinput}
-> target <- HTMLInitFile(getwd(), filename = "IndSampling")
 > HTML(myIndSamplingSummary)
-> HTMLEndFile()
 \end{Sinput}
 \end{Schunk} 
+
+The method further accepts the same arguments as the function
+\texttt{HTMLInitFile()} from the package \texttt{R2HTML}, e.g., 
+\texttt{filename}, \texttt{outdir}, \texttt{CSSFile} and 
+\texttt{Title}.
 
 
 \subsubsection{Parameters for a fixed herd sensitivity}
@@ -624,17 +627,20 @@ plot(myLtdSampleSummary)
 
 The summary of the object of class \texttt{LtdSamplingSummary} can 
 further be exported to an html-file using the method \texttt{HTML}. 
-\index{Method!\texttt{HTML-LtdSamplingSummary}} This requires the 
-specification of a file to write to, which can be done using the 
-function \texttt{HTMLInitFile()} from the package \texttt{R2HTML}. 
+\index{Method!\texttt{HTML-LtdSamplingSummary}} This method creates 
+an html-file and a css-file containing the the data in the 
+\texttt{IndSamplingSummary} object, as well as the diagnostic plots. 
 
 \begin{Schunk}
 \begin{Sinput}
-> target <- HTMLInitFile(getwd(), filename = "LtdSampling")
 > HTML(myLtdSamplingSummary)
-> HTMLEndFile()
 \end{Sinput}
 \end{Schunk} 
+
+The method further accepts the same arguments as the function
+\texttt{HTMLInitFile()} from the package \texttt{R2HTML}, e.g., 
+\texttt{filename}, \texttt{outdir}, \texttt{CSSFile} and 
+\texttt{Title}.
 
 \subsubsection{Parameters for a fixed sample limit}
 
@@ -901,6 +907,8 @@ sampleFixed <- sample(x = myIndSampling, size = "fixed")
 length(sampleFixed$indexSample)
 ## Significance:
 sampleFixed$aPostAlpha
+## Sample:
+head(sampleFixed$sample)
 
 ## Dynamic sampling:
 ####################
@@ -909,6 +917,8 @@ sampleDynamic <- sample(x = myIndSampling, size = "dynamic")
 length(sampleDynamic$indexSample)
 ## Significance:
 sampleDynamic$aPostAlpha
+## Sample:
+head(sampleFixed$sample)
 @ 
   
 

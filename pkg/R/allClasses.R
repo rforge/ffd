@@ -125,7 +125,7 @@ setMethod("show", signature(object="SurveyData"),
         } else {        
             cat("             NO DATA\n")
         } 
-        cat("@poplulationData:")
+        cat("@populationData:")
         if (dim(object@populationData)[1] > 0){
             cat("\n")
             if (dim(object@populationData)[1] > displayLimit){
@@ -347,12 +347,22 @@ setMethod("summary", signature(object="LtdSampling"),
 ##########################################################
 
 setMethod("HTML", signature(x = "LtdSampling"),
-    function(x, file = .HTML.file, append = TRUE,...){ 
-        HTML(paste("<h1>Survey to substantiate Freedom From Disease</h1>"))
-        HTML(paste("<h2>Limited Sampling</h2>"))
-        HTML("<br>")
+     function(x, filename = "LtdSampling", outdir = getwd(), CSSFile="ffd.css", 
+        Title = "Limited Sampling", append = TRUE,...){ 
+        
+        ## Create html-file:
+        target <- HTMLInitFile(outdir = outdir , filename = filename, 
+            CSSFile = CSSFile, Title = Title,...)
+        
+        ## Write content:
+        ###########################################################################
+        ###########################################################################
+        cat("\n\n<h1>Survey to substantiate Freedom From Disease</h1>\n", file = target,
+            append = TRUE)
+        cat("<h2>Limited Sampling</h2>\n<br>\n", file = target, append = TRUE)
+
         ## Survey Parameters:
-        HTML("<h3>Survey Parameters:</h3>")  
+        cat("<h3>Survey Parameters:</h3>\n", file = target, append = TRUE)  
         surveyDat <- x@surveyData      
         theTable <- matrix(c(as.character(surveyDat@designPrevalence), 
             as.character(surveyDat@alpha), 
@@ -370,10 +380,10 @@ setMethod("HTML", signature(x = "LtdSampling"),
             "Intra herd prevalence ", "Sensitivity of diagnostic test ",
             "Cost per herd ", "Cost per animal ")[indVec]
         HTML(theTable, align = "left")
-        HTML("<br>")
-        ## Data description:
+        cat("<br>\n\n", file = target, append = TRUE)
+ 
         if (length(surveyDat@nAnimalVec) > 0){
-            HTML("<h3>Data Description:</h3>")  
+            cat("<h3>Data Description:</h3>\n", file = target, append = TRUE)  
             theTable <- matrix(c(length(surveyDat@nAnimalVec), 
                 sum(surveyDat@nAnimalVec), 
                 min(surveyDat@nAnimalVec),
@@ -385,10 +395,11 @@ setMethod("HTML", signature(x = "LtdSampling"),
                 "Median herd size ",
                 "Maximal herd size ")
             HTML(theTable, align = "left")
-            HTML("<br>")
+            cat("<br>\n\n", file = target, append = TRUE)
         }
+
         ## Sample Parameters:
-        HTML("<h3>Sampling strategy:</h3>")
+        cat("<h3>Sampling strategy:</h3>\n", file = target, append = TRUE)  
         theTable <- matrix(c(as.character(x@sampleSizeLtd),
             as.character(round(x@meanHerdSensitivity,2)),
             as.character(x@nHerds),
@@ -405,7 +416,19 @@ setMethod("HTML", signature(x = "LtdSampling"),
             "Expected total number of animals to test ",
             "Expected total costs of the survey ")[indVec]
         HTML(theTable, align = "left")
-        HTML("<br>")       
+        cat("<br>\n\n", file = target, append = TRUE)   
+        
+        ## Close body and html tag
+        cat("\n\n<br>\n<hr size=1>\n<font size=-1>\nGenerated on: <i>", format(Sys.time(), "%b %d %X %Y"), 
+            "</i> - <b>FFD</b>\n<hr size=1>\n\n", file = target, append = TRUE)
+        
+        cat("\n</body>\n</html>\n", file = target, append = TRUE)        
+                
+        ## Check if css.file exists:
+        css.file <- file.path(outdir,CSSFile, fsep = .Platform$file.sep)
+        ## If file does not exist create one:
+        createStyleFile(css.file)                    
+                
         ## Return value:
         invisible(x) 
 })
@@ -431,8 +454,7 @@ setMethod("sample", signature(x = "LtdSampling"),
             aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaErrorVector, 
                 nPopulation = length(x@surveyData@nAnimalVec), 
                 nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
-                method = "approx")
-            out <- list(indexSample = indexSample, aPostAlpha = aPostAlpha)
+                method = "approx")            
         } else {
             ## Data frame with herd-based alpha-errors for each herd
             ## (=1-herd sensitivity):
@@ -475,7 +497,15 @@ setMethod("sample", signature(x = "LtdSampling"),
                     nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
                     method = "approx")                               
             }
-            out <- list(indexSample = sort(alphaDataFrame$id[1:k]), aPostAlpha = aPostAlpha)            
+            indexSample <- sort(alphaDataFrame$id[1:k])                        
+        }
+        if (dim(x@surveyData@populationData)[1] > 0){        
+            out <- list(indexSample = indexSample, 
+                sample = x@surveyData@populationData[indexSample,], 
+                aPostAlpha = aPostAlpha)
+        } else {
+            out <- list(indexSample = indexSample, 
+                aPostAlpha = aPostAlpha)
         }
         return(out)        
     }
@@ -645,12 +675,23 @@ setMethod("summary", signature(object="LtdSamplingSummary"),
 ##########################################################
 
 setMethod("HTML", signature(x = "LtdSamplingSummary"),
-    function(x, file = .HTML.file, append = TRUE,...){ 
-        HTML(paste("<h1>Survey to substantiate Freedom From Disease</h1>"))
-        HTML(paste("<h2>Limited Sampling</h2>"))
-        HTML("<br>")
+     function(x, filename = "LtdSamplingSummary", outdir = getwd(), CSSFile = "ffd.css", 
+        Title = "Limited Sampling Diagnostics", append = TRUE,...){ 
+        
+        ## Create html-file:
+        target <- HTMLInitFile(outdir = outdir , filename = filename, 
+            CSSFile = CSSFile, Title = Title,...)
+        
+        ## Write content:
+        ###########################################################################
+        ###########################################################################
+        cat("\n\n<h1>Survey to substantiate Freedom From Disease</h1>\n", file = target,
+            append = TRUE)
+        cat("<h2>Limited Sampling</h2>\n<br>\n", file = target, append = TRUE)
+        
         ## Survey Parameters:
-        HTML("<h3>Survey Parameters:</h3>")  
+        cat("<h3>Survey Parameters:</h3>\n", file = target, append = TRUE)  
+        surveyDat <- x@surveyData      
         surveyDat <- x@surveyData      
         theTable <- matrix(c(as.character(surveyDat@designPrevalence), 
             as.character(surveyDat@alpha), 
@@ -668,10 +709,11 @@ setMethod("HTML", signature(x = "LtdSamplingSummary"),
             "Intra herd prevalence ", "Sensitivity of diagnostic test ",
             "Cost per herd ", "Cost per animal ")[indVec]
         HTML(theTable, align = "left")
-        HTML("<br>")
+        cat("<br>\n\n", file = target, append = TRUE)
+        
         ## Data description:
         if (length(surveyDat@nAnimalVec) > 0){
-            HTML("<h3>Data Description:</h3>")  
+            cat("<h3>Data Description:</h3>\n", file = target, append = TRUE)  
             theTable <- matrix(c(length(surveyDat@nAnimalVec), 
                 sum(surveyDat@nAnimalVec), 
                 min(surveyDat@nAnimalVec),
@@ -683,10 +725,11 @@ setMethod("HTML", signature(x = "LtdSamplingSummary"),
                 "Median herd size ",
                 "Maximal herd size ")
             HTML(theTable, align = "left")
-            HTML("<br>")
+            cat("<br>\n\n", file = target, append = TRUE)
         }
-        ## Sample Parameters:
-        HTML("<h3>Cost optimal sampling strategy:</h3>")
+        
+        ## Cost optimal sample Parameters:
+        cat("<h3>Cost optimal sampling strategy:</h3>\n", file = target, append = TRUE)
         if(length(x@expectedCostVec) > 0){
             indCostOpt <- which.min(x@expectedCostVec)
             theTable <- matrix(c(as.character(x@sampleSizeLtdVec[indCostOpt]),
@@ -704,11 +747,53 @@ setMethod("HTML", signature(x = "LtdSamplingSummary"),
                 "Number of herds to test ", 
                 "Expected total number of animals to test ",
                 "Expected total costs of the survey ")[indVec]
-            HTML(theTable, align = "left")
-            HTML("<br>")        
+            HTML(theTable, align = "left")                   
         } else {
             HTML("No data regarding costs.")
+        }
+        cat("<br>\n\n", file = target, append = TRUE)
+        
+        ## Diagnostic plots:
+        cat("<h3>Diagnostic plots:</h3>\n", file = target, append = TRUE)
+        survey.Data <- x@surveyData
+        
+        if(length(survey.Data@nAnimalVec) > 0){   
+            par(mfrow = c(1, 1))     
+            ## Mean herd sensitivity:
+            plot(x@sampleSizeLtdVec, x@meanHerdSensVec, type = "l",
+                xlab = "Sample limit", ylab = "Mean herd sensitivity")
+            HTMLplot(Width = 500, Height = 500, Caption = "Herd sensitivity",
+                GraphFileName = paste("GRAPH",format(Sys.time(), "%b%d_%H%M%S"),"1", sep = "_"))
+            ## Number of herds to be tested:
+            plot(x@sampleSizeLtdVec, x@nHerdsVec, type = "l",
+                xlab = "Sample limit", ylab = "No. of herds to be tested")
+            HTMLplot(Width = 500, Height = 500, Caption = "Sample size",
+                GraphFileName = paste("GRAPH",format(Sys.time(), "%b%d_%H%M%S"),"2", sep = "_"))
+            ## Total number of animals to be tested:
+            plot(x@sampleSizeLtdVec, x@nAnimalsMeanVec, type = "l",
+                xlab = "Sample limit", ylab = "Expected total no. of animals to be tested")
+            HTMLplot(Width = 500, Height = 500, Caption = "Total number of animals to test",
+                GraphFileName = paste("GRAPH",format(Sys.time(), "%b%d_%H%M%S"),"3", sep = "_"))
+            ## Expected cost:
+            plot(x@sampleSizeLtdVec, x@expectedCostVec, type = "l",
+                xlab = "Sample limit", ylab = "Expected cost") 
+            HTMLplot(Width = 500, Height = 500, Caption = "Expected costs of the survey",
+                GraphFileName = paste("GRAPH",format(Sys.time(), "%b%d_%H%M%S"),"4", sep = "_"))                         
+        } else {
+            HTML("No data to produce plots.")
         }        
+                
+        ## Close body and html tag
+        cat("\n\n<br>\n<hr size=1>\n<font size=-1>\nGenerated on: <i>", format(Sys.time(), "%b %d %X %Y"), 
+            "</i> - <b>FFD</b>\n<hr size=1>\n\n", file = target, append = TRUE)
+        
+        cat("\n</body>\n</html>\n", file = target, append = TRUE)        
+                
+        ## Check if css.file exists:
+        css.file <- file.path(outdir,CSSFile, fsep = .Platform$file.sep)
+        ## If file does not exist create one:
+        createStyleFile(css.file)                    
+                
         ## Return value:
         invisible(x) 
 })
@@ -736,7 +821,10 @@ setMethod("plot", signature(x = "LtdSamplingSummary"),
                 xlab = "Sample limit", ylab = "Expected total no. of animals to be tested")
             ## Expected cost:
             plot(x@sampleSizeLtdVec, x@expectedCostVec, type = "l",
-                xlab = "Sample limit", ylab = "Expected cost")                        
+                xlab = "Sample limit", ylab = "Expected cost")  
+            ## Titel:
+            par(oma = c(2,1,3,1)) 
+            title("Analysis limited sampling", outer = TRUE)                                  
         } else {
             cat("Object of class 'LtdSamplingSummary' contains no data.\n")
         }
@@ -920,12 +1008,23 @@ setMethod("summary", signature(object="IndSampling"),
 ##########################################################
 
 setMethod("HTML", signature(x = "IndSampling"),
-    function(x, file = .HTML.file, append = TRUE,...){ 
-        HTML(paste("<h1>Survey to substantiate Freedom From Disease</h1>"))
-        HTML(paste("<h2>Individual Sampling</h2>"))
-        HTML("<br>")
+     function(x, filename = "IndSampling", outdir = getwd(), CSSFile = "ffd.css", 
+        Title = "Individual Sampling", append = TRUE,...){ 
+        
+        ## Create html-file:
+        target <- HTMLInitFile(outdir = outdir , filename = filename, 
+            CSSFile = CSSFile, Title = Title,...)
+        
+        ## Write content:
+        ###########################################################################
+        ###########################################################################
+        cat("\n\n<h1>Survey to substantiate Freedom From Disease</h1>\n", file = target,
+            append = TRUE)
+        cat("<h2>Individual Sampling</h2>\n<br>\n", file = target, append = TRUE)
+
         ## Survey Parameters:
-        HTML("<h3>Survey Parameters:</h3>")  
+        cat("<h3>Survey Parameters:</h3>\n", file = target, append = TRUE)  
+        surveyDat <- x@surveyData      
         surveyDat <- x@surveyData      
         theTable <- matrix(c(as.character(surveyDat@designPrevalence), 
             as.character(surveyDat@alpha), 
@@ -943,10 +1042,11 @@ setMethod("HTML", signature(x = "IndSampling"),
             "Intra herd prevalence ", "Sensitivity of diagnostic test ",
             "Cost per herd ", "Cost per animal ")[indVec]
         HTML(theTable, align = "left")
-        HTML("<br>")
+        cat("<br>\n\n", file = target, append = TRUE)
+        
         ## Data description:
         if (length(surveyDat@nAnimalVec) > 0){
-            HTML("<h3>Data Description:</h3>")  
+            cat("<h3>Data Description:</h3>\n", file = target, append = TRUE)  
             theTable <- matrix(c(length(surveyDat@nAnimalVec), 
                 sum(surveyDat@nAnimalVec), 
                 min(surveyDat@nAnimalVec),
@@ -958,10 +1058,11 @@ setMethod("HTML", signature(x = "IndSampling"),
                 "Median herd size ",
                 "Maximal herd size ")
             HTML(theTable, align = "left")
-            HTML("<br>")
+            cat("<br>\n\n", file = target, append = TRUE)
         }
+        
         ## Sample Parameters:
-        HTML("<h3>Sampling strategy:</h3>")
+        cat("<h3>Sampling strategy:</h3>\n", file = target, append = TRUE)  
         theTable <- matrix(c(as.character(round(x@herdSensitivity,2)),
             as.character(x@nHerds),
             as.character(round(x@nAnimalsMean,2)), 
@@ -974,10 +1075,11 @@ setMethod("HTML", signature(x = "IndSampling"),
             "Number of herds to test ", 
             "Expected total number of animals to test ",
             "Expected total costs of the survey ")[indVec]
-        HTML(theTable, align = "left")        
+        HTML(theTable, align = "left")
         if (dim(x@lookupTable)[1] > 0){
             HTML("<br>")       
-            HTML("<h4>Number of animals to test per herd:</h4>")        
+            cat("<br>\n\n<h4>Number of animals to test per herd:</h4>\n", file = target, 
+                append = TRUE)        
             ## Format lookup Table for pretty summary:
             ## Index for herd sizes where entire herd is tested:
             indAll <- range(which(x@lookupTable[,"N_upper"] == x@lookupTable[,"sampleSize"]))
@@ -1004,9 +1106,21 @@ setMethod("HTML", signature(x = "IndSampling"),
             }
             names(tempDf) <- c("Herd size"," No. of animals to test")
             HTML(tempDf, align = "left", row.names = FALSE)
-        }         
+        }
+        
+        ## Close body and html tag
+        cat("\n\n<br>\n<hr size=1>\n<font size=-1>\nGenerated on: <i>", format(Sys.time(), "%b %d %X %Y"), 
+            "</i> - <b>FFD</b>\n<hr size=1>\n\n", file = target, append = TRUE)
+        
+        cat("\n</body>\n</html>\n", file = target, append = TRUE)        
+                
+        ## Check if css.file exists:
+        css.file <- file.path(outdir,CSSFile, fsep = .Platform$file.sep)
+        ## If file does not exist create one:
+        createStyleFile(css.file)                    
+                
         ## Return value:
-        invisible(x) 
+        invisible(x)         
 })
 
 ################################################## SAMPLE:
@@ -1032,8 +1146,7 @@ setMethod("sample", signature(x = "IndSampling"),
             aPostAlpha <- computeAposterioriError(alphaErrorVector = alphaErrorVector, 
                 nPopulation = length(x@surveyData@nAnimalVec), 
                 nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
-                method = "approx")
-            out <- list(indexSample = indexSample, aPostAlpha = aPostAlpha)
+                method = "approx")            
         } else {
             ## Data frame with herd-based alpha-errors for each herd
             ## (=1-herd sensitivity):
@@ -1076,7 +1189,15 @@ setMethod("sample", signature(x = "IndSampling"),
                     nDiseased = max(round(length(x@surveyData@nAnimalVec)*x@surveyData@designPrevalence),1), 
                     method = "approx")                               
             }
-            out <- list(indexSample = sort(alphaDataFrame$id[1:k]), aPostAlpha = aPostAlpha)            
+            indexSample <- sort(alphaDataFrame$id[1:k])                        
+        }
+        if (dim(x@surveyData@populationData)[1] > 0){        
+            out <- list(indexSample = indexSample, 
+                sample = x@surveyData@populationData[indexSample,], 
+                aPostAlpha = aPostAlpha)
+        } else {
+            out <- list(indexSample = indexSample, 
+                aPostAlpha = aPostAlpha)
         }
         return(out)        
     }
@@ -1225,12 +1346,22 @@ setMethod("summary", signature(object="IndSamplingSummary"),
 ##########################################################
 
 setMethod("HTML", signature(x = "IndSamplingSummary"),
-    function(x, file = .HTML.file, append = TRUE,...){ 
-        HTML(paste("<h1>Survey to substantiate Freedom From Disease</h1>"))
-        HTML(paste("<h2>Individual Sampling</h2>"))
-        HTML("<br>")
+     function(x, filename = "IndSamplingSummary", outdir = getwd(), CSSFile = "ffd.css", 
+        Title = "Individual Sampling Diagnostics", append = TRUE,...){ 
+        
+        ## Create html-file:
+        target <- HTMLInitFile(outdir = outdir , filename = filename, 
+            CSSFile = CSSFile, Title = Title,...)
+        
+        ## Write content:
+        ###########################################################################
+        ###########################################################################
+        cat("\n\n<h1>Survey to substantiate Freedom From Disease</h1>\n", file = target,
+            append = TRUE)
+        cat("<h2>Individual Sampling</h2>\n<br>\n", file = target, append = TRUE)
+
         ## Survey Parameters:
-        HTML("<h3>Survey Parameters:</h3>")  
+        cat("<h3>Survey Parameters:</h3>\n", file = target, append = TRUE)  
         surveyDat <- x@surveyData      
         theTable <- matrix(c(as.character(surveyDat@designPrevalence), 
             as.character(surveyDat@alpha), 
@@ -1248,10 +1379,11 @@ setMethod("HTML", signature(x = "IndSamplingSummary"),
             "Intra herd prevalence ", "Sensitivity of diagnostic test ",
             "Cost per herd ", "Cost per animal ")[indVec]
         HTML(theTable, align = "left")
-        HTML("<br>")
+        cat("<br>\n\n", file = target, append = TRUE)
+
         ## Data description:
         if (length(surveyDat@nAnimalVec) > 0){
-            HTML("<h3>Data Description:</h3>")  
+            cat("<h3>Data Description:</h3>\n", file = target, append = TRUE)  
             theTable <- matrix(c(length(surveyDat@nAnimalVec), 
                 sum(surveyDat@nAnimalVec), 
                 min(surveyDat@nAnimalVec),
@@ -1263,10 +1395,11 @@ setMethod("HTML", signature(x = "IndSamplingSummary"),
                 "Median herd size ",
                 "Maximal herd size ")
             HTML(theTable, align = "left")
-            HTML("<br>")
+            cat("<br>\n\n", file = target, append = TRUE)
         }
-        ## Sample Parameters:
-        HTML("<h3>Cost optimal sampling strategy:</h3>")
+        
+        ## Cost optimal sample Parameters:
+        cat("<h3>Cost optimal sampling strategy:</h3>\n", file = target, append = TRUE)
         if(length(x@expectedCostVec) > 0){
             indCostOpt <- which.min(x@expectedCostVec)
             theTable <- matrix(c(as.character(x@herdSensVec[indCostOpt]),
@@ -1281,11 +1414,57 @@ setMethod("HTML", signature(x = "IndSamplingSummary"),
                 "Number of herds to test ", 
                 "Expected total number of animals to test ",
                 "Expected total costs of the survey ")[indVec]            
-            HTML(theTable, align = "left")
-            HTML("<br>")        
+            HTML(theTable, align = "left")                    
         } else {
             HTML("No data regarding costs.")
+        }
+        cat("<br>\n\n", file = target, append = TRUE)
+                
+        ## Diagnostic plots:
+        cat("<h3>Diagnostic plots:</h3>\n", file = target, append = TRUE)
+        survey.Data <- x@surveyData
+        
+        if(length(survey.Data@nAnimalVec) > 0){        
+            ## Mean number of animals per herd:
+            #cat("<h4>Mean number of animals to test per herd</h4>\n", file = target, append = TRUE)
+            par(mfrow = c(1, 1))
+            plot(x@herdSensVec, x@nAnimalsMeanVec/x@nHerdsVec, type = "l",
+                xlab = "Herd sensitivity", ylab = "Mean no. of animals per herd to be tested")
+            HTMLplot(Width = 500, Height = 500, Caption = "Number of animals to test per herd",
+                GraphFileName = paste("GRAPH",format(Sys.time(), "%b%d_%H%M%S"),"1", sep = "_"))
+            ## Number of herds to be tested:
+            #cat("<h4>Sample size</h4>\n", file = target, append = TRUE)
+            plot(x@herdSensVec, x@nHerdsVec, type = "l",
+                xlab = "Herd sensitivity", ylab = "No. of herds to be tested")
+            HTMLplot(Width = 500, Height = 500, Caption = "Sample size",
+                GraphFileName = paste("GRAPH",format(Sys.time(), "%b%d_%H%M%S"),"2", sep = "_"))
+            ## Total number of animals to be tested:
+            #cat("<h4>Number of animals to test</h4>\n", file = target, append = TRUE)
+            plot(x@herdSensVec, x@nAnimalsMeanVec, type = "l",
+                xlab = "Herd sensitivity", ylab = "Expected total no. of animals to be tested")
+            HTMLplot(Width = 500, Height = 500, Caption = "Total number of animals to test",
+                GraphFileName = paste("GRAPH",format(Sys.time(), "%b%d_%H%M%S"),"3", sep = "_"))
+            ## Expected cost:
+            #cat("<h4>Expected costs</h4>\n", file = target, append = TRUE)
+            plot(x@herdSensVec, x@expectedCostVec, type = "l",
+                xlab = "Herd sensitivity", ylab = "Expected cost")  
+            HTMLplot(Width = 500, Height = 500, Caption = "Expected costs of the survey",
+                GraphFileName = paste("GRAPH",format(Sys.time(), "%b%d_%H%M%S"),"4", sep = "_"))                         
+        } else {
+            HTML("No data to produce plots.")
         }        
+                
+        ## Close body and html tag
+        cat("\n\n<br>\n<hr size=1>\n<font size=-1>\nGenerated on: <i>", format(Sys.time(), "%b %d %X %Y"), 
+            "</i> - <b>FFD</b>\n<hr size=1>\n\n", file = target, append = TRUE)
+        
+        cat("\n</body>\n</html>\n", file = target, append = TRUE)        
+                
+        ## Check if css.file exists:
+        css.file <- file.path(outdir,CSSFile, fsep = .Platform$file.sep)
+        ## If file does not exist create one:
+        createStyleFile(css.file)                    
+                
         ## Return value:
         invisible(x) 
 })
@@ -1312,7 +1491,10 @@ setMethod("plot", signature(x = "IndSamplingSummary"),
                 xlab = "Herd sensitivity", ylab = "Expected total no. of animals to be tested")
             ## Expected cost:
             plot(x@herdSensVec, x@expectedCostVec, type = "l",
-                xlab = "Herd sensitivity", ylab = "Expected cost")                        
+                xlab = "Herd sensitivity", ylab = "Expected cost")           
+            ## Titel:
+            par(oma = c(2,1,3,1)) 
+            title("Analysis individual sampling", outer = TRUE)                  
         } else {
             cat("Object of class 'IndSamplingSummary' contains no data.\n")
         }

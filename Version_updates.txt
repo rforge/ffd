@@ -1,0 +1,13 @@
+Version updates:
+
+0.1-2
+-----------
+2010-08-04: 
+ - Added caption to the plots
+ - Changed HTML-method to automatically create the html and css files,
+   added plots to the html file 
+
+0.1-1
+-----------
+2010-07-19:
+ - First alpha version of package
