@@ -38,7 +38,7 @@
 ##    -
 ##
 computeOptimalSampleSize <- function(nPopulation, prevalence, alpha = 0.05, 
-    sensitivity, specificity = 1, lookupTable = FALSE){
+    sensitivity = 1, specificity = 1, lookupTable = FALSE){
     if(!lookupTable){
         ## Compute sample size for one fixed population size:
         #####################################################

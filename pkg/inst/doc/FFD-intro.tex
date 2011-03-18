@@ -35,7 +35,7 @@ using two-stage sampling}
 \newcommand{\Sp}{\mbox{Sp}} 
 
 
-\Abstract{In practise, when conducting surveys to substantiate 
+\Abstract{In practice, when conducting surveys to substantiate 
 freedom from disease in large populations two-stage sampling 
 strategies are often used in order to account for herd-level 
 clustering of diseases. Using a modified hypergeometric formula the 
@@ -1080,7 +1080,7 @@ specified, for \texttt{method == "individual"} the herd sensitivity
 \end{Sinput}
 \begin{Soutput}
    user  system elapsed 
-   0.33    0.00    0.33 
+   0.34    0.00    0.36 
 \end{Soutput}
 \begin{Sinput}
 > errorExact    
@@ -1127,8 +1127,6 @@ the sample:
 
 \begin{Schunk}
 \begin{Sinput}
-> ## Fixed sampling:
-> ##################
 > sampleFixed <- sample(x = myIndSampling, size = "fixed")
 > ## Sample Size:
 > length(sampleFixed$indexSample)

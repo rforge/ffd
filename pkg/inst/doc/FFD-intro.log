@@ -1,10 +1,7 @@
-This is pdfTeX, Version 3.141592-1.40.4 (MiKTeX 2.7) (preloaded format=pdflatex 2009.7.27)  4 AUG 2010 13:51
+This is pdfTeX, Version 3.141592-1.40.4 (MiKTeX 2.7) (preloaded format=pdflatex 2009.7.27)  3 MAR 2011 12:19
 entering extended mode
-**D:/projekte/Brucella*melitensis/analyse/ws/DVG_Projekt/FFD/inst/doc/FFD-intro
-.tex
-
-("D:/projekte/Brucella melitensis/analyse/ws/DVG_Projekt/FFD/inst/doc/FFD-intro
-.tex"
+**D:/R_packages/FFD/inst/doc/FFD-intro.tex
+(D:/R_packages/FFD/inst/doc/FFD-intro.tex
 LaTeX2e <2005/12/01>
 Babel <v3.8h> and hyphenation patterns for english, dumylang, nohyphenation, ge
 rman, ngerman, french, loaded.
@@ -832,12 +829,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  7284 strings out of 95340
- 100477 string characters out of 1184279
+ 100354 string characters out of 1184279
  164262 words of memory out of 1500000
  10240 multiletter control sequences out of 110000
  44110 words of font info for 85 fonts, out of 1200000 for 2000
  14 hyphenation exceptions out of 8191
- 43i,10n,34p,374b,438s stack positions out of 5000i,500n,10000p,200000b,5000s
+ 43i,10n,34p,333b,438s stack positions out of 5000i,500n,10000p,200000b,5000s
 {C:/Programme/MiKTeX 2.7/dvips/cm-super/cm-super-ts1.enc}<C:/Programme/MiKTeX
  2.7/fonts/type1/bluesky/cm/cmbx10.pfb><C:/Programme/MiKTeX 2.7/fonts/type1/blu
 esky/cm/cmbx12.pfb><C:/Programme/MiKTeX 2.7/fonts/type1/bluesky/cm/cmex10.pfb><
@@ -854,7 +851,7 @@ rogramme/MiKTeX 2.7/fonts/type1/bluesky/cm/cmti10.pfb><C:/Programme/MiKTeX 2.7/
 fonts/type1/bluesky/cm/cmti12.pfb><C:/Programme/MiKTeX 2.7/fonts/type1/bluesky/
 cm/cmtt10.pfb><C:/Programme/MiKTeX 2.7/fonts/type1/public/cm-super/sfrm1095.pfb
 >
-Output written on FFD-intro.pdf (20 pages, 230157 bytes).
+Output written on FFD-intro.pdf (20 pages, 230150 bytes).
 PDF statistics:
  373 PDF objects out of 1000 (max. 8388607)
  70 named destinations out of 1000 (max. 131072)

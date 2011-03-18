@@ -43,7 +43,7 @@ library("FFD")
 data("sheepData")
 @
 
-\Abstract{In practise, when conducting surveys to substantiate 
+\Abstract{In practice, when conducting surveys to substantiate 
 freedom from disease in large populations two-stage sampling 
 strategies are often used in order to account for herd-level 
 clustering of diseases. Using a modified hypergeometric formula the 

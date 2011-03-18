@@ -43,7 +43,7 @@ computeSampleSizeInd <- function(survey.Data, herdSensitivity){
     nAnimalTable <- table(survey.Data@nAnimalVec)
     nAnimalDataFrame <- data.frame(nAnimal = as.numeric(as.character(names(nAnimalTable))),
         freq = as.vector(nAnimalTable), interval = cut(x = as.numeric(as.character(names(nAnimalTable))), 
-        breaks = breaks))        
+        breaks = breaks, dig.lab = 10))        
     nAnimalDataFrame <- merge(x = nAnimalDataFrame, 
         y = subset(nAnimalLookup, select = c("interval", "sampleSize")),
         by = "interval", all = TRUE)    

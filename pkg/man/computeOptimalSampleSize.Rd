@@ -18,7 +18,7 @@ depending on the population size for individual sampling
 }
 \usage{
 computeOptimalSampleSize(nPopulation, prevalence, alpha = 0.05, 
-    sensitivity, specificity = 1, lookupTable = FALSE)
+    sensitivity = 1, specificity = 1, lookupTable = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -37,7 +37,7 @@ value = 0.05.
 }
   \item{sensitivity}{
 Numeric between 0 and 1. Sensitivity of the diagnostic (for one-stage 
-sampling) or herd test (for two stage sampling). 
+sampling) or herd test (for two stage sampling). Default value = 1.
 }
   \item{specificity}{
 Numeric between 0 and 1. Specificity of the diagnostic (for one-stage 
