@@ -15,7 +15,8 @@ The step size for the herd sensitivities can be specified by the user via the ar
 \code{stepSize}. If no step size is specified a step size of 0.02 is used.
 }
 \usage{
-indSamplingSummary(survey.Data, stepSize = 0.02)
+indSamplingSummary(survey.Data, stepSize = 0.02,
+    nSampleFixVec = NULL, probVec = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +29,22 @@ Numeric. A series of parameters is computed for a
 sequence of herd sensitivities. The argument \code{stepSize}
 specifies the step size used in the discretization of
 the herd sensitivities (default = 0.02).
+}
+  \item{nSampleFixVec}{
+Numeric vector containing some NAs (optional argument). 
+For risk groups for which the sample size is fixed 
+specify the sample size. For the risk groups for which
+the sample size should be computed set NA (order of the
+risk groups must be the same order as in \code{survey.Data@riskValueData}).
+}
+  \item{probVec}{
+Numeric vector. For those risk groups for which the 
+sample size should be computed sample probabilities must 
+be specified.
+The vector must have the same length as the number of 
+NA entries in \code{nSampleFixVec} or if \code{nSampleFixVec} is not 
+specified, probVec must have the same length as the 
+number of rows in \code{survey.Data@riskValueData}.
 }
 }
 \value{
@@ -51,11 +68,20 @@ See \code{\linkS4class{IndSamplingSummary}} and \code{\linkS4class{SurveyData}} 
 }
 \examples{
 data(sheepData)
-mySurvey <- surveyData(nAnimalVec = sheepData$nSheep, 
-    populationData = sheepData, designPrevalence = 0.002, 
-    alpha = 0.05, intraHerdPrevalence = 0.13,
-    diagSensitivity = 0.9, costHerd = 15, costAnimal = 20)
+sheepData$size <- ifelse(sheepData$nSheep < 30, "small", "large")
+riskValueData <- data.frame(riskGroup = c("small", "large"), 
+    riskValues = c(1,2))
+mySurvey <- surveyData(nAnimalVec = sheepData$nSheep,
+		riskGroupVec = sheepData$size,
+		riskValueData = riskValueData,
+		populationData = sheepData, designPrevalence = 0.002,
+		alpha = 0.05, intraHerdPrevalence = 0.13,
+		diagSensitivity = 0.9, costHerd = 30, costAnimal = 7.1)
+## Individual sampling without risk groups:    
 myIndSamplingSummary <- indSamplingSummary(survey.Data = mySurvey, 
     stepSize = 0.02)
+## Individual sampling with risk groups:    
+myIndSamplingSummaryRG <- indSamplingSummary(survey.Data = mySurvey, 
+    stepSize = 0.02, nSampleFixVec = NULL, probVec = c(1,4))
 }
 \keyword{methods}

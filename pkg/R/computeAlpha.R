@@ -56,6 +56,8 @@ computeAlpha <- function(nAnimalVec, method, sampleSizeLtd, herdSensitivity,
         for (ii in seq(along=sampleSizes)[-1]){ 
             sampleSizesUniqueVec[ii] <- max(sampleSizesUniqueVec[ii-1], sampleSizes[ii])
         } 
+#		## FOR TESTING ONLY!!!!!!
+#		sampleSizesUniqueVec <- sampleSizes
     } 
     ## Compute the number of diseased individuals in the herds (minimum = 1):
     nDiseasedUniqueVec <- round(nAnimalUniqueVec * intraHerdPrevalence)

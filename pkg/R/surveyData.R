@@ -9,6 +9,14 @@
 ##
 ## Input parameters:
 ##    nAnimalVec............Integer vector. Stock sizes of the herds.
+##    riskGroupVec..........Character vector. Vector containing the 
+##                          the name of a risk group to which the farm belongs. 
+##                          Optional argument. If provided, it must have the 
+#                           same length as nAnimalVec.
+##    riskValueData.........Data frame. Data frame where the first column 
+##                          contains the labels in riskGroupVec and the second 
+##                          column contains the numeric values for the relative 
+##                          infection risk.
 ##    populationData........Data frame. Columns of the data frame
 ##                          must have the same length as 'nAnimalVec'. 
 ##                          The data frame can contain additional data such as 
@@ -29,10 +37,14 @@
 ##
 ## Return value: object of the class 'SurveyData'.
 
-surveyData <- function(nAnimalVec = numeric(), populationData = data.frame(), 
-    designPrevalence = numeric(), alpha = numeric(), intraHerdPrevalence = numeric(),
+surveyData <- function(nAnimalVec = numeric(), riskGroupVec = character(),
+	riskValueData = data.frame(),
+	populationData = data.frame(), designPrevalence = numeric(), 
+	alpha = numeric(), intraHerdPrevalence = numeric(),
     diagSensitivity = numeric(), costHerd = numeric(), costAnimal = numeric()){
-    out <- new("SurveyData", nAnimalVec = nAnimalVec, populationData = populationData,
+    out <- new("SurveyData", nAnimalVec = nAnimalVec, 
+		riskGroupVec = riskGroupVec, riskValueData = riskValueData, 
+		populationData = populationData,
         designPrevalence = designPrevalence, alpha = alpha, 
         intraHerdPrevalence = intraHerdPrevalence, diagSensitivity = diagSensitivity,
         costHerd = costHerd, costAnimal = costAnimal)

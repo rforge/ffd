@@ -14,7 +14,7 @@ alpha-error.
 \usage{
 computeAlphaLimitedSampling(stockSizeVector, sampleSizeLtd, 
     intraHerdPrevalence, diagSensitivity, 
-    diagSpecificity = 1)
+    diagSpecificity = 1, groupVec = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -42,14 +42,22 @@ Numeric between 0 and 1. Specificity (= probability of
 a testnegative result, given the tested individual is not diseased) 
 of the diagnostic test.
 }
+  \item{groupVec}{
+Character vector. Optional parameter. If specified it must have the same length
+as \code{stockSizeVector}. Defines the gouping of the data. Mean Alpha is then 
+returned for each group.
+}
 }
 \value{
-List of two elements:
+List of 3 elements:
   \item{alphaDataFrame}{Data frame. Variables \code{size} = vector of the unique 
   herd sizes in the population, \code{alpha} = vector of herd-level alpha errors 
   attained by limited sampling scheme for the different herd sizes.}
   \item{meanAlpha}{Numeric between 0 and 1. Mean alpha-error attained by
   strategy "limited sampling" for given sample size and herd size distribution.}
+  \item{meanAlphaRiskGroups}{If \code{groupVec} is specified, the mean alpha 
+  error is returned for each group, concatenated into a vector. Otherwise this
+  list element is NULL}
 }
 \references{
 M. Ziller, T. Selhorst, J. Teuffert, M. Kramer and H. Schlueter,

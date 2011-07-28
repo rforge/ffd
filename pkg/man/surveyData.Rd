@@ -8,7 +8,8 @@ Constructor for class 'SurveyData'.
 Constructor for objects of the class 'SurveyData'.
 }
 \usage{
-surveyData(nAnimalVec = numeric(), populationData = data.frame(), 
+surveyData(nAnimalVec = numeric(), riskGroupVec = character(),
+	riskValueData = data.frame(), populationData = data.frame(), 
     designPrevalence = numeric(), alpha = numeric(), 
     intraHerdPrevalence = numeric(), diagSensitivity = numeric(), 
     costHerd = numeric(), costAnimal = numeric())
@@ -17,6 +18,18 @@ surveyData(nAnimalVec = numeric(), populationData = data.frame(),
 \arguments{
   \item{nAnimalVec}{
 Positive numeric vector containing the number of animals per holding.
+}
+  \item{riskGroupVec}{
+Character vector. Vector containing the 
+the name of a risk group to which the farm belongs. 
+Optional argument. If provided, it must have the 
+same length as nAnimalVec.
+}
+  \item{riskValueData}{
+Data frame. Data frame where the first column 
+contains the labels in riskGroupVec and the second 
+column contains the numeric values for the relative 
+infection risk.
 }
   \item{populationData}{
 Data frame. Columns of the data frame

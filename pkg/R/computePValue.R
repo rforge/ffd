@@ -28,6 +28,7 @@
 ## Is called by:
 ##    computeOptimalSampleSize.R
 ##    computeAlphaLimitedSampling.R
+##    computeAlpha.R
 ##
 computePValue <- function(nPopulation, nSample, nDiseased, 
         sensitivity, specificity = 1){

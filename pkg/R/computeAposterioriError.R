@@ -14,11 +14,11 @@
 ###############################################################################
 ## Berechne den Alpha-Fehler der gezogenen Stichprobe.
 ## Eingabeparameter:
-##   alphaErrorVector...Vektor (numeric). Alpha-Fehler (= 1-Herdensensitivität)
+##   alphaErrorVector...Vektor (numeric). Alpha-Fehler (= 1-Herdensensitivitaet)
 ##                      der gezogenen Betriebe.
-##   nPopulation........Numeric. Populationsgröße (= Gesamtanzahl der Betriebe)
+##   nPopulation........Numeric. Populationsgroesse (= Gesamtanzahl der Betriebe)
 ##   nDiseased..........Numeric. Anzahl der erkrankten Betriebe lt. 
-##                      Designprävalenz
+##                      Designpraevalenz
 ##   method............."exact" for exact error, "approx" for approximation
 ##                      recommended for nDiseased > 7
 ## Ausgabe: Numeric. Alpha-Fehler bei gezogener Stichprobe (exakt).
@@ -27,6 +27,8 @@
 computeAposterioriError <- function(alphaErrorVector, nPopulation, 
     nDiseased, method = "default"){
     
+    if (nDiseased < 1) return(1)
+
     ## Determine sample method:
     if (!(method %in% c("exact", "approx", "approximation", "default"))){
         stop("Undefined value for argument 'method'; must be either 'exact' or 'approx'.")
@@ -56,6 +58,18 @@ computeAposterioriError <- function(alphaErrorVector, nPopulation,
         probabilitiesDiseasedVector <- choose(nPopulation - nSample,
             nDiseased - c(0, nDiseasedSampleVector)) / choose(nPopulation, 
             nDiseased)
+        ## Fehlercheck:
+		if (any(is.nan(probabilitiesDiseasedVector))){
+		probabilitiesDiseasedVector <- exp(lfactorial(nPopulation - nSample) - 
+			lfactorial(nDiseased - c(0, nDiseasedSampleVector)) - 
+		    lfactorial(nPopulation - nSample - nDiseased + 
+			    c(0, nDiseasedSampleVector)) - 
+            lfactorial(nPopulation) + lfactorial(nDiseased) +
+			lfactorial(nPopulation-nDiseased))
+        }		
+        if (any(is.nan(probabilitiesDiseasedVector))){
+			stop("Binoial Coefficient could not be evaluated.")
+		}
         ## Vector of the conditional probabilities of finding 0 test positive
         ## herds in the sample, given that there are y infected herds in the 
         ## sample for all y in nDiseasedSampleVector (costly computation due

@@ -23,6 +23,12 @@ Objects can be created by calls of the form \code{new("SurveyData", ...)}.
   \describe{    
     \item{\code{nAnimalVec}:}{Object of class \code{"numeric"} (nonnegative). Vector containing the 
         number of animals per holding.}
+    \item{\code{riskGroupVec}:}{Object of class \code{"character"}. Vector containing the 
+        the name of a risk group to which the farm belongs. Optional argument.
+        If provided, it must have the same length as \code{nAnimalVec}.}     
+    \item{\code{riskValueData}:}{Object of class \code{"data.frame"}. Data frame
+        where the first column contains the labels in \code{riskGroupVec} and
+        the second column contains the numeric values for the relative infection risk.}   
     \item{\code{populationData}:}{Object of class \code{"data.frame"}. Columns of the data frame
         must have the same length as the vector in slot \code{nAnimalVec}. The data frame can
         contain additional data such as herd id, name and address of the owner etc.}

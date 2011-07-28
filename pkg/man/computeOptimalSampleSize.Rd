@@ -101,4 +101,4 @@ sampleSizeIndividual <- computeOptimalSampleSize(nPopulation = 300,
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{methods}
+\keyword{misc}

@@ -5,7 +5,7 @@
 FUNCTION to compute the a-posteriori error.
 }
 \description{
-For sampling scheme designed to substantiate freedom from
+For a sampling scheme designed to substantiate freedom from
 disease the function computes the a-posteriori alpha-error, i.e.,
 the actual alpha-error based on the drawn sample. 
 }

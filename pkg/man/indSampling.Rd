@@ -14,7 +14,8 @@ well as a lookup table for the number of animals to test per herd, depending on 
 herd size.
 }
 \usage{
-indSampling(survey.Data, herdSensitivity)
+indSampling(survey.Data, herdSensitivity, nSampleFixVec = NULL, 
+	probVec = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,6 +25,22 @@ the function \code{\link{surveyData}}.
 }
   \item{herdSensitivity}{
 Numeric between 0 and 1. Desired herd sensitivity.
+}
+  \item{nSampleFixVec}{
+Numeric vector containing some NAs (optional argument). 
+For risk groups for which the sample size is fixed 
+specify the sample size. For the risk groups for which
+the sample size should be computed set NA (order of the
+risk groups must be the same order as in \code{survey.Data@riskValueData}).
+}
+  \item{probVec}{
+Numeric vector. For those risk groups for which the 
+sample size should be computed sample probabilities must 
+be specified.
+The vector must have the same length as the number of 
+NA entries in \code{nSampleFixVec} or if \code{nSampleFixVec} is not 
+specified, probVec must have the same length as the 
+number of rows in \code{survey.Data@riskValueData}.
 }
 }
 \value{
@@ -47,10 +64,20 @@ See \code{\linkS4class{IndSampling}} and \code{\linkS4class{SurveyData}} for add
 }
 \examples{
 data(sheepData)
-mySurvey <- surveyData(nAnimalVec = sheepData$nSheep, 
-    populationData = sheepData, designPrevalence = 0.002, 
-    alpha = 0.05, intraHerdPrevalence = 0.13,
-    diagSensitivity = 0.9, costHerd = 30, costAnimal = 7.1)
-myIndSampling <- indSampling(survey.Data = mySurvey, herdSensitivity = 0.7)
+sheepData$size <- ifelse(sheepData$nSheep < 30, "small", "large")
+riskValueData <- data.frame(riskGroup = c("small", "large"), 
+    riskValues = c(1,2))
+mySurvey <- surveyData(nAnimalVec = sheepData$nSheep,
+		riskGroupVec = sheepData$size,
+		riskValueData = riskValueData,
+		populationData = sheepData, designPrevalence = 0.002,
+		alpha = 0.05, intraHerdPrevalence = 0.13,
+		diagSensitivity = 0.9, costHerd = 30, costAnimal = 7.1)
+## Individual sampling without risk groups:    
+myIndSampling <- indSampling(survey.Data = mySurvey, 
+    herdSensitivity = 0.7)
+## Individual sampling with risk groups:    
+myIndSamplingRG <- indSampling(survey.Data = mySurvey, 
+    herdSensitivity = 0.7, nSampleFixVec = NULL, probVec = c(1,4))
 }
 \keyword{methods}

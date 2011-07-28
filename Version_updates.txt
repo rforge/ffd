@@ -1,5 +1,12 @@
 Version updates:
 
+1.0-0
+-----------
+2011-07-28:
+ - Added graphical user interface
+ - Added risk-based targeted sampling
+
+
 0.1-2
 -----------
 2010-08-04: 

@@ -1,0 +1,72 @@
+\name{FFD_GUI}
+\alias{FFD_GUI}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+Freedom From Disease sampling plan calculator
+}
+\description{
+This function opens the Graphical User Interface for the FFD sampling plan calculator.\cr\cr
+The GUI offers the functionality to \cr
+	\itemize{
+		\item{compute first and second-stage sample sizes for two-stage sampling schemes to substantiate freedom from disease,}
+		\item{analyze two-stage sampling schemes with respect to overall cost and sensitivity,}
+        \item{determine cost-optimal strategies and}
+		\item{draw samples from a population.}
+	}
+The GUI is structured into three tabs, \emph{Data Input, Parameters, Calculations}:
+    \cr\cr
+    \strong{Data Input:} The farm data is specified. A list of farms is required with one row per farm and one column
+    containing the herd size, i.e. the number of animals on the farm. The data must be provided in the CSV file format,
+    however currently only the central European format with comma = ",", seperator = ";" is supported. The location of
+    the csv-file is specified in the field \emph{Data file}, the name of the column containing the herd size is set in 
+    the field \emph{Herd sizes column} via a dropdown menu.
+    \cr\cr
+    \strong{Parameters:} Next the survey parameters: design prevalence, Type I error level, intraherd prevalence,
+    and test sensitivity must be set and a sampling strategy (limited sampling or individual sampling, see, e.g. Ziller et al.)
+    must be chosen. Furthermore the cost of each tested herd (excluding the cost per tested animal) and the cost 
+    of each tested animal can be specified for cost analyses.
+    \cr\cr
+    \strong{Calculations:} Once a sampling strategy is chosen the tab is activated, where cost optimal sampling 
+    plans can be determined (\emph{Sample size Diagnostics}), cost and sensitivity of a fixed sampling schemes can
+    be computed (\emph{Compute sample size -> Calculate}) and an actual sample can be drawn from the farm file 
+    (\emph{Compute sample size -> Sample}).
+}
+\usage{
+FFD_GUI()
+}
+
+\details{
+	The \emph{FFD GUI} provides the following menu options:
+	\cr\cr
+	\strong{File}
+	\itemize{
+		\item{\strong{Load} loads population data and survey parameter settings from a ffd-RData file.}
+		\item{\strong{Save} saves population data and survey parameter settings to a ffd-RData file.}
+		\item{\strong{Load examples} loads built-in examples.}
+		\item{\strong{Reset} clears all entered data.}
+	}
+
+	\strong{Help}
+	\itemize{
+		\item{\strong{R Documentation} opens the help file for the FFD GUI (\emph{cf} \code{?FFD_GUI}).}
+		\item{\strong{FFD Manual (PDF)} opens the pdf manual}
+		\item{\strong{About FFD_GUI} displays version and developers info.}
+	}
+}
+
+
+\author{
+Ian Kopacka
+}
+
+\references{
+	\itemize{
+        \item{Cameron A.R. and Baldock F.C. (1998). \emph{A new probability formula for surveys to substantiate freedom from disease}, Prev. Vet. Med. 34 (1), pp. 1-17}
+        \item{Cameron A.R. and Baldock F.C. (1998). \emph{Two-stage sampling in surveys to substantiate freedom from disease}, Prev. Vet. Med. 34 (1), pp. 19-30}
+		\item{Ziller M., Selhorst T. Teuffert J., Kramer M. and Schlueter H. (2002). \emph{Analysis of sampling strategies to substantiate freedom from disease in large areas}, Prev. Vet. Med. 52 (3-4), pp. 333-343}
+		\item{\url{http://ffd.r-forge.r-project.org/}}
+	}
+}
+
+\keyword{GUI}
+

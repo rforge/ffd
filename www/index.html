@@ -27,6 +27,12 @@
         <h1>
             R-Package: FFD - Freedom From Disease using Two-Stage Sampling
         </h1>
+        
+        
+        <br/>
+        <br/>
+     
+          
         <h2>
             Introduction
         </h2>
@@ -36,13 +42,33 @@
         </p>
 
         <p>
-            In the package FFD, tools for calculating optimal sample sizes (on animal and herd level) using sampling strategies "individual sampling" or "limited sampling" (see Ziller, Selhorst, Teuffert, Kramer, and Schl&uuml;ter (2002)) are implemented. The idea behind individual sampling is that the number of animals to test is computed for each herd size in order to guarantee a certain herd sensitivity independent of the herd size. With limited sampling a pre-fixed number of animals is tested for each herd (=sample limit), irrespective of the herd size. Using FFD cost optimal sampling strategies can be determined finding the optimal herd sensitivity or sample limit, respectively.
+            In the package FFD, tools for calculating optimal sample sizes (on animal and herd level) using sampling strategies "individual sampling" or "limited sampling" (see Ziller, Selhorst, Teuffert, Kramer, and Schl&uuml;ter (2002)) are implemented.
         </p>
-
+            <ul>
+            <li><b>Individual sampling:</b> The idea behind individual sampling is that the number of animals to test is computed for each herd size in order to guarantee a constant herd sensitivity independent of the herd size, i.e., for each herd the probability of finding a possibly present disease is the same.
+            </li>
+            <li><b>Limited sampling:</b> With limited sampling a pre-fixed number of animals is tested for each herd (=sample limit), irrespective of the herd size. This results in a herd sensitivity that varies with the herd size, i.e., the smaller the herd the higher the probability of finding a possibly present disease.
+            </li>
+            </ul>
+                    
+        
         <p>
-            The package provides S4-classes and methods for convenient handling, as well as conventional functions in order to guarantee maximum flexibility.
+            Both these sampling strategies have their merits, which can be analyzed and compared using the package FFD. Cost optimal sampling strategies can be determined finding the optimal herd sensitivity or sample limit, respectively. The package provides an easy-to-use graphical user interface (GUI). More advanced users can, however, make use of the provided S4-classes and methods, as well as the underlying conventional functions in order to fully make use of the maximum flexibility offered.
         </p>
+        <h2>
+            Risk-based sampling
+        </h2>       
+        <p>
+            The latest release of the package FFD now offers the possibility to use risk-based sampling. Targeting high-risk population strata, the overall sample size and the cost of the surveys can be reduced, while still maintaining the same overall significance level.
+        </p> 
 
+
+        <table border="0" width="90%" align="center" cellspacing = "30">
+        <tr valign="middle">
+        <td>
+        <img src="ffd_gui_01_small.png" alt ="Limited sampling graphic" />
+        </td>
+        <td>
 
         <h2>
             Features
@@ -50,18 +76,30 @@
 
 
         <ul>
-            <li>Calculation of sample sizes for strategies "individual sampling" and "limited sampling"
+            <li>Easy-to-use <a href="ffd_gui_03.png">graphical user interface</a>
             </li>
-            <li>Diagnostic tools for the optimization of efficiency and costs
+            <li>S4-classes and methods, as well as conventional functions for maximal flexibility
             </li>
-            <li>A-posteriori calculation of the alpha-error corresponding to a specific sample
+            <li>Calculation of sample sizes for strategies <a href="ffd_gui_individual.png">"individual sampling"</a> and <a href="ffd_gui_limited.png">"limited sampling"</a>
             </li>
-            <li>Sampling methods using either a fixed number of herds or dynamically updating the
+            <li>Diagnostic tools for the <a href="ffd_gui_optimal.png">optimization</a> of efficiency and costs
+            </li>
+            <li>A-posteriori calculation of the <a href="ffd_gui_apost.png">alpha-error</a> corresponding to a specific sample
+            </li>
+            <li>Sampling methods using either a fixed number of herds or <a href="ffd_gui_dynamic.png">dynamically updating</a> the
             achieved significance of the sample and randomly sampling herds until a specified
             significance level is met
             </li>
+            <li><a href="ffd_gui_risk.png">Risk-based sampling</a>
+            </li>
         </ul>
-        <h2>
+        
+        </td>
+        </tr>
+        </table>
+        
+        
+<!--        <h2>
             Example
         </h2>
         <p>
@@ -100,7 +138,7 @@
                     	<a href="ffd-big.png"><img src="ffd-small.png" alt ="Limited sampling graphic" /></a>
                 </td>
             </tr>
-        </table>
+        </table> -->
 
 
 

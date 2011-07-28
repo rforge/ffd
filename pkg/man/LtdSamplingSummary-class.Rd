@@ -34,8 +34,23 @@ Objects can be created by calls of the form \code{new("LtdSamplingSummary", ...)
         If a herd contains fewer animals the entire herd is tested (vector).}
     \item{\code{meanHerdSensVec}:}{Object of class \code{"numeric"} with 
         values between 0 and 1. Mean herd sensitivity in the population (vector).}
+    \item{\code{meanHerdSensPerRGMx}:}{Object of class \code{"matrix"} 
+        with values between 0 and 1. Mean herd sensitivity of each risk group 
+        [columns] and sample limit [rows] (if population is stratified by 
+        risk groups).}
     \item{\code{nHerdsVec}:}{Object of class \code{"numeric"}. Number of herds
         to be tested according to the herd sensitivity \code{meanHerdSensitivity} (vector).}
+    \item{\code{nHerdsPerRiskGroupMx}:}{Object of class \code{"matrix"}. Number of herds
+        to be tested per risk group [columns] and sample limit [rows]
+        (if population is stratified by risk groups).}
+    \item{\code{nSampleFixVec}:}{Object of class \code{"numeric"}. Numeric vector 
+        containing some NAs (optional argument). For risk groups for which the 
+        sample size is fixed it specifies the sample size. For the risk groups 
+        for which the sample size was computed it was set to NA (order of the
+        risk groups is the same as in \code{survey.Data@riskValueData}).}
+    \item{\code{probVec}:}{Object of class \code{"numeric"}. Contains the
+        sample probabilities for those risk groups for which the sample size 
+        was computed (=NA entries in \code{nSampleFixVec}).}
     \item{\code{nAnimalsMeanVec}:}{Object of class \code{"numeric"}. Expected 
         total number of animals to be tested in the survey (vector).}
     \item{\code{expectedCostVec}:}{Object of class \code{"numeric"}. Expected 

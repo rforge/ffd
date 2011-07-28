@@ -33,6 +33,16 @@ Objects can be created by calls of the form \code{new("IndSampling", ...)}.
         0 and 1. Desired herd sensitivity.}
     \item{\code{nHerds}:}{Object of class \code{"numeric"}. Number of herds
         to be tested according to the herd sensitivity \code{herdSensitivity}.}
+    \item{\code{nHerdsPerRiskGroup}:}{Object of class \code{"numeric"}. Number of herds
+        to be tested per risk group (if population is stratified by risk groups).}
+    \item{\code{nSampleFixVec}:}{Object of class \code{"numeric"}. Numeric vector 
+        containing some NAs (optional argument). For risk groups for which the 
+        sample size is fixed it specifies the sample size. For the risk groups 
+        for which the sample size was computed it was set to NA (order of the
+        risk groups is the same as in \code{survey.Data@riskValueData}).}
+    \item{\code{probVec}:}{Object of class \code{"numeric"}. Contains the
+        sample probabilities for those risk groups for which the sample size 
+        was computed (=NA entries in \code{nSampleFixVec}).}
     \item{\code{nAnimalsMean}:}{Object of class \code{"numeric"}. Expected 
         total number of animals to be tested in the survey.}
     \item{\code{expectedCost}:}{Object of class \code{"numeric"}. Expected 

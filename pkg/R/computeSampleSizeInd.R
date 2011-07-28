@@ -27,7 +27,7 @@
 ##    nAnimalsMeanPerHerd...Numeric. Mean number of animals to test
 ##                          per herd.
 
-computeSampleSizeInd <- function(survey.Data, herdSensitivity){
+computeSampleSizeInd <- function(survey.Data, herdSensitivity, groupVec = NULL){
     ## Number of animals:
     #####################
     ## Compute lookup table:
@@ -40,14 +40,35 @@ computeSampleSizeInd <- function(survey.Data, herdSensitivity){
     nAnimalLookup$interval <- paste("(", nAnimalLookup$N_lower-1, ",",
         nAnimalLookup$N_upper, "]", sep = "")
     breaks <- c(nAnimalLookup$N_lower[1]-1, nAnimalLookup$N_upper)     
-    nAnimalTable <- table(survey.Data@nAnimalVec)
-    nAnimalDataFrame <- data.frame(nAnimal = as.numeric(as.character(names(nAnimalTable))),
-        freq = as.vector(nAnimalTable), interval = cut(x = as.numeric(as.character(names(nAnimalTable))), 
-        breaks = breaks, dig.lab = 10))        
-    nAnimalDataFrame <- merge(x = nAnimalDataFrame, 
-        y = subset(nAnimalLookup, select = c("interval", "sampleSize")),
-        by = "interval", all = TRUE)    
-    ## Mean number of animals to be tested per holding:
-    nAnimalsMeanPerHerd <- sum(with(nAnimalDataFrame, freq*sampleSize))/length(survey.Data@nAnimalVec)
-    return(list(lookupTable = lookupTable, nAnimalsMeanPerHerd = nAnimalsMeanPerHerd))
+	
+	## No grouping Variable:
+	if (is.null(groupVec)){
+		nAnimalTable <- table(survey.Data@nAnimalVec)
+		nAnimalDataFrame <- data.frame(nAnimal = as.numeric(as.character(names(nAnimalTable))),
+				freq = as.vector(nAnimalTable), interval = cut(x = as.numeric(as.character(names(nAnimalTable))), 
+						breaks = breaks, dig.lab = 10))        
+		nAnimalDataFrame <- merge(x = nAnimalDataFrame, 
+				y = subset(nAnimalLookup, select = c("interval", "sampleSize")),
+				by = "interval", all.x = TRUE, all.y = FALSE)    
+		## Mean number of animals to be tested per holding:
+		nAnimalsMeanPerHerd <- sum(with(nAnimalDataFrame, freq*sampleSize))/length(survey.Data@nAnimalVec)
+	} else {
+	## Grouping variable specified:
+	    splitList <- split(x = survey.Data@nAnimalVec, f = groupVec)
+    	nAnimalsMeanPerHerdList <- lapply(splitList, function(nAnimalVec){
+	        nAnimalTable <- table(nAnimalVec)			
+		    nAnimalDataFrame <- data.frame(nAnimal = as.numeric(as.character(names(nAnimalTable))),
+	    		freq = as.vector(nAnimalTable), 
+			    interval = cut(x = as.numeric(as.character(names(nAnimalTable))), 
+			    breaks = breaks, dig.lab = 10)) 
+            nAnimalDataFrame <- merge(x = nAnimalDataFrame, 
+			    y = subset(nAnimalLookup, select = c("interval", "sampleSize")),
+			    by = "interval", all.x = TRUE, all.y = FALSE) 
+	        ## Mean number of animals to be tested per holding:
+		    nAnimalsMeanPerHerd <- sum(with(nAnimalDataFrame, freq*sampleSize))/length(nAnimalVec)				
+	    })
+	    nAnimalsMeanPerHerd <- Reduce(function(x,y) c(x,y), nAnimalsMeanPerHerdList)
+	    names(nAnimalsMeanPerHerd) <- names(nAnimalsMeanPerHerdList)	
+	}	
+	return(list(lookupTable = lookupTable, nAnimalsMeanPerHerd = nAnimalsMeanPerHerd))
 }
