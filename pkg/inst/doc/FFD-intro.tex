@@ -236,7 +236,7 @@ The occurrence of most diseases is influenced by certain external factors, so-ca
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
 
-\subsection{Two risk groups}\label{subsec:2_risk_goups}
+\subsection{Two risk groups}
 
 For the sake of clarity we consider a population that is stratified by one dichotomous risk factor, i.e, a population that is divided into two risk groups - a low-risk ($RG_1$) and a high-risk group ($RG_2$). Examples for such a risk factor could be import from abroad (yes/no), animal density (higher/lower than a certain threshold), etc. For these risk groups, the population size $N_1$ and $N_2$ and the risk of contracting the disease $R_1$ and $R_2$, respectively, must be known. In our risk-based survey, we draw a random sample of size $n_1$ from risk group $RG_1$ and a random sample of size $n_2$ from risk group $RG_2$.
 
@@ -244,7 +244,7 @@ For the sake of clarity we consider a population that is stratified by one dicho
 
 \subsubsection{The overall alpha error}
 
-According to the design prevalence, we assume that there are $d$ infected herds in the population. If the distribution of the $d$ infected herds among the risk groups is known (i.e., the number of infected herds in $RG_1$ and $RG_2$: $d_1$ and $d_2$ with $d_1 + d_2 = d$), the overall alpha error of the risk-based survey can be computed by first computing the alpha error for the individual risk groups
+According to the design prevalence, we assume that there are $d$ infected herds in the population. If the distribution of the $d$ infected herds among the risk groups is known (i.e., the number of infected herds in $RG_1$ and $RG_2$: $d_1$ and $d_2$ with $d_1+d_2 = d$), the overall alpha error of the risk-based survey can be computed by first computing the alpha error for the individual risk groups
 $$
 \alpha_i = P(T^+=0 | N_i, n_i, d_i),
 $$
@@ -487,7 +487,7 @@ In the next step, the (relative) disease risks associated to the specified risk 
 \caption{Specifying the relative risks and parameters for the sample size distribution among the risk groups (tab: Parameters).}
 \label{fig:GUI_Risk_Data} \end{figure}
 
-A click on the button \emph{Set risk group parameters} opens a separate data input matrix. The risk groups make up the rows, the disease risks are entered in the first column, entitled \emph{Risk\_values} \index{GUI!Risk\_values}. 
+A click on the button \emph{Set risk group parameters} opens a separate data input matrix. The risk groups make up the rows, the disease risks are entered in the first column, entitled \emph{Risk\_values} \index{GUI!Risk\_values}.
 
 For the computation of the optimal sample size, the user must specify \textbf{exactly one} of two parameters for each risk group:
 %
@@ -553,27 +553,29 @@ In the following example the data set \texttt{sheepData}, contained in the packa
 > summary(mySurvey)
 \end{Sinput}
 \begin{Soutput}
- Survey Parameters:
- ------------------
- Design Prevalence:               0.002
- Significance level:              0.05
- Intra herd prevalence:           0.200
- Sensitivity of diagnostic test:  0.900
- Cost per tested herd:            30.00
- Cost per tested animal:          7.00
-
- Survey Data:
- ------------
- Number of herds:             15287
- Total number of animals:     224606
- Number of animals per herd:
-  Min.   1st Qu. Median   Mean   3rd Qu.  Max.
-    1       4       8     14.69    17      249
- Additional population data:
- 'data.frame':  15287 obs. of  3 variables:
-  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...
-  $ state : int  7 7 6 3 8 7 3 7 4 3 ...
-  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...
+ Survey Parameters:                             
+ ------------------                             
+ Design Prevalence:               0.002         
+ Significance level:              0.05          
+ Intra herd prevalence:           0.200         
+ Sensitivity of diagnostic test:  0.900         
+ Cost per tested herd:            30.00         
+ Cost per tested animal:          7.00          
+                                                
+ Survey Data:                                   
+ ------------                                   
+ Number of herds:             15287             
+ Total number of animals:     224606            
+ Number of animals per herd:                    
+  Min.   1st Qu. Median   Mean   3rd Qu.  Max.  
+    1       4       8     14.69    17      249  
+ No risk group data.                            
+ No risk value data.                            
+ Additional population data:                    
+ 'data.frame':  15287 obs. of  3 variables:     
+  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...       
+  $ state : int  7 7 6 3 8 7 3 7 4 3 ...        
+  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ... 
 \end{Soutput}
 \end{Schunk}
 
@@ -596,35 +598,37 @@ The package \texttt{FFD} provides the S4-class \texttt{IndSamplingSummary} \inde
 > summary(myIndSamplingSummary)
 \end{Sinput}
 \begin{Soutput}
- INDIVIDUAL SAMPLING DIAGNOSTICS:
-
- Survey Parameters:
- ------------------
- Design Prevalence:               0.002
- Significance level:              0.05
- Intra herd prevalence:           0.200
- Sensitivity of diagnostic test:  0.900
- Cost per tested herd:            30.00
- Cost per tested animal:          7.00
-
- Survey Data:
- ------------
- Number of herds:             15287
- Total number of animals:     224606
- Number of animals per herd:
-  Min.   1st Qu. Median   Mean   3rd Qu.  Max.
-    1       4       8     14.69    17      249
- Additional population data:
- 'data.frame':  15287 obs. of  3 variables:
-  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...
-  $ state : int  7 7 6 3 8 7 3 7 4 3 ...
-  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...
-
- Cost optimal sampling strategy:
- -------------------------------
- Herd sensitivity:                          0.900
- Number of herds to test:                   1564
- Expected total number of animals to test:  10743.38
+ INDIVIDUAL SAMPLING DIAGNOSTICS:                    
+                                                     
+ Survey Parameters:                                  
+ ------------------                                  
+ Design Prevalence:               0.002              
+ Significance level:              0.05               
+ Intra herd prevalence:           0.200              
+ Sensitivity of diagnostic test:  0.900              
+ Cost per tested herd:            30.00              
+ Cost per tested animal:          7.00               
+                                                     
+ Survey Data:                                        
+ ------------                                        
+ Number of herds:             15287                  
+ Total number of animals:     224606                 
+ Number of animals per herd:                         
+  Min.   1st Qu. Median   Mean   3rd Qu.  Max.       
+    1       4       8     14.69    17      249       
+ No risk group data.                                 
+ No risk value data.                                 
+ Additional population data:                         
+ 'data.frame':  15287 obs. of  3 variables:          
+  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...            
+  $ state : int  7 7 6 3 8 7 3 7 4 3 ...             
+  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...      
+                                                     
+ Cost optimal sampling strategy:                     
+ -------------------------------                     
+ Herd sensitivity:                          0.900    
+ Number of herds to test:                   1564     
+ Expected total number of animals to test:  10743.38 
  Expected total costs of the survey:        122123.67
 \end{Soutput}
 \end{Schunk}
@@ -670,45 +674,47 @@ For a herd sensitivity of 0.7 the parameters are:
 > summary(myIndSampling)
 \end{Sinput}
 \begin{Soutput}
- INDIVIDUAL SAMPLING:
-
- Survey Parameters:
- ------------------
- Design Prevalence:               0.002
- Significance level:              0.05
- Intra herd prevalence:           0.200
- Sensitivity of diagnostic test:  0.900
- Cost per tested herd:            30.00
- Cost per tested animal:          7.00
-
- Survey Data:
- ------------
- Number of herds:             15287
- Total number of animals:     224606
- Number of animals per herd:
-  Min.   1st Qu. Median   Mean   3rd Qu.  Max.
-    1       4       8     14.69    17      249
- Additional population data:
- 'data.frame':  15287 obs. of  3 variables:
-  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...
-  $ state : int  7 7 6 3 8 7 3 7 4 3 ...
-  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...
-
- Sampling strategy:
- ------------------
- Herd sensitivity:                          0.700
- Number of herds to test:                   2011
- Expected total number of animals to test:  9845.44
- Expected total costs of the survey:        129248.09
+ INDIVIDUAL SAMPLING:                                    
+                                                         
+ Survey Parameters:                                      
+ ------------------                                      
+ Design Prevalence:               0.002                  
+ Significance level:              0.05                   
+ Intra herd prevalence:           0.200                  
+ Sensitivity of diagnostic test:  0.900                  
+ Cost per tested herd:            30.00                  
+ Cost per tested animal:          7.00                   
+                                                         
+ Survey Data:                                            
+ ------------                                            
+ Number of herds:             15287                      
+ Total number of animals:     224606                     
+ Number of animals per herd:                             
+  Min.   1st Qu. Median   Mean   3rd Qu.  Max.           
+    1       4       8     14.69    17      249           
+ No risk group data.                                     
+ No risk value data.                                     
+ Additional population data:                             
+ 'data.frame':  15287 obs. of  3 variables:              
+  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...                
+  $ state : int  7 7 6 3 8 7 3 7 4 3 ...                 
+  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...          
+                                                         
+ Sampling strategy:                                      
+ ------------------                                      
+ Herd sensitivity:                          0.700        
+ Number of herds to test:                   2011         
+ Expected total number of animals to test:  9845.44      
+ Expected total costs of the survey:        129248.09    
  Lookup table for the number of animals to test per herd:
-
-    Herd size  |  No. of animals to test
-   ------------------------------------
-     1 - 3    |       entire herd
-     4 - 5    |            4
-       6      |            5
-    7 - 31    |            6
-   32 - 249   |            7
+                                                         
+    Herd size  |  No. of animals to test                 
+   ------------------------------------                  
+     1 - 3    |       entire herd                        
+     4 - 5    |            4                             
+       6      |            5                             
+    7 - 31    |            6                             
+   32 - 249   |            7                             
 \end{Soutput}
 \end{Schunk}
 
@@ -729,36 +735,38 @@ The package \texttt{FFD} provides the S4-class \texttt{LtdSamplingSummary} \inde
 > summary(myLtdSampleSummary)
 \end{Sinput}
 \begin{Soutput}
- LIMITED SAMPLING DIAGNOSTICS:
-
- Survey Parameters:
- ------------------
- Design Prevalence:               0.002
- Significance level:              0.05
- Intra herd prevalence:           0.200
- Sensitivity of diagnostic test:  0.900
- Cost per tested herd:            30.00
- Cost per tested animal:          7.00
-
- Survey Data:
- ------------
- Number of herds:             15287
- Total number of animals:     224606
- Number of animals per herd:
-  Min.   1st Qu. Median   Mean   3rd Qu.  Max.
-    1       4       8     14.69    17      249
- Additional population data:
- 'data.frame':  15287 obs. of  3 variables:
-  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...
-  $ state : int  7 7 6 3 8 7 3 7 4 3 ...
-  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...
-
- Cost optimal sampling strategy:
- -------------------------------
- Fixed number of animals to test per herd:  5
- Mean herd sensitivity:                     0.769
- Number of herds to test:                   1830
- Expected total number of animals to test:  7854.38
+ LIMITED SAMPLING DIAGNOSTICS:                       
+                                                     
+ Survey Parameters:                                  
+ ------------------                                  
+ Design Prevalence:               0.002              
+ Significance level:              0.05               
+ Intra herd prevalence:           0.200              
+ Sensitivity of diagnostic test:  0.900              
+ Cost per tested herd:            30.00              
+ Cost per tested animal:          7.00               
+                                                     
+ Survey Data:                                        
+ ------------                                        
+ Number of herds:             15287                  
+ Total number of animals:     224606                 
+ Number of animals per herd:                         
+  Min.   1st Qu. Median   Mean   3rd Qu.  Max.       
+    1       4       8     14.69    17      249       
+ No risk group data.                                 
+ No risk value data.                                 
+ Additional population data:                         
+ 'data.frame':  15287 obs. of  3 variables:          
+  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...            
+  $ state : int  7 7 6 3 8 7 3 7 4 3 ...             
+  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...      
+                                                     
+ Cost optimal sampling strategy:                     
+ -------------------------------                     
+ Fixed number of animals to test per herd:  5        
+ Mean herd sensitivity:                     0.769    
+ Number of herds to test:                   1830     
+ Expected total number of animals to test:  7854.38  
  Expected total costs of the survey:        109880.68
 \end{Soutput}
 \end{Schunk}
@@ -803,36 +811,38 @@ Let's say we have chosen the appropriate sample limit to be 7 animals per herd:
 > summary(myLtdSampling)
 \end{Sinput}
 \begin{Soutput}
- LIMITED SAMPLING:
-
- Survey Parameters:
- ------------------
- Design Prevalence:               0.002
- Significance level:              0.05
- Intra herd prevalence:           0.200
- Sensitivity of diagnostic test:  0.900
- Cost per tested herd:            30.00
- Cost per tested animal:          7.00
-
- Survey Data:
- ------------
- Number of herds:             15287
- Total number of animals:     224606
- Number of animals per herd:
-  Min.   1st Qu. Median   Mean   3rd Qu.  Max.
-    1       4       8     14.69    17      249
- Additional population data:
- 'data.frame':  15287 obs. of  3 variables:
-  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...
-  $ state : int  7 7 6 3 8 7 3 7 4 3 ...
-  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...
-
- Sampling strategy:
- ------------------
- Fixed number of animals to test per herd:  7
- Mean herd sensitivity:                     0.863
- Number of herds to test:                   1630
- Expected total number of animals to test:  8939.78
+ LIMITED SAMPLING:                                   
+                                                     
+ Survey Parameters:                                  
+ ------------------                                  
+ Design Prevalence:               0.002              
+ Significance level:              0.05               
+ Intra herd prevalence:           0.200              
+ Sensitivity of diagnostic test:  0.900              
+ Cost per tested herd:            30.00              
+ Cost per tested animal:          7.00               
+                                                     
+ Survey Data:                                        
+ ------------                                        
+ Number of herds:             15287                  
+ Total number of animals:     224606                 
+ Number of animals per herd:                         
+  Min.   1st Qu. Median   Mean   3rd Qu.  Max.       
+    1       4       8     14.69    17      249       
+ No risk group data.                                 
+ No risk value data.                                 
+ Additional population data:                         
+ 'data.frame':  15287 obs. of  3 variables:          
+  $ herdId: int  1 2 3 4 5 6 7 8 9 10 ...            
+  $ state : int  7 7 6 3 8 7 3 7 4 3 ...             
+  $ nSheep: num  22 30 4 11 11 3 94 53 4 24 ...      
+                                                     
+ Sampling strategy:                                  
+ ------------------                                  
+ Fixed number of animals to test per herd:  7        
+ Mean herd sensitivity:                     0.863    
+ Number of herds to test:                   1630     
+ Expected total number of animals to test:  8939.78  
  Expected total costs of the survey:        111478.48
 \end{Soutput}
 \end{Schunk}
@@ -1013,8 +1023,8 @@ The vector of herd-level alpha errors can be generated using the function \textt
    })
 \end{Sinput}
 \begin{Soutput}
-   user  system elapsed
-   0.33    0.00    0.32
+   user  system elapsed 
+    0.3     0.0     0.3 
 \end{Soutput}
 \begin{Sinput}
 > errorExact
@@ -1029,8 +1039,8 @@ The vector of herd-level alpha errors can be generated using the function \textt
    })
 \end{Sinput}
 \begin{Soutput}
-   user  system elapsed
-      0       0       0
+   user  system elapsed 
+      0       0       0 
 \end{Soutput}
 \begin{Sinput}
 > errorApprox
@@ -1041,7 +1051,7 @@ The vector of herd-level alpha errors can be generated using the function \textt
 \end{Schunk}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %\tableofcontents
 
 \printindex
 
@@ -1050,4 +1060,4 @@ The vector of herd-level alpha errors can be generated using the function \textt
 \end{document}
 
 
-%%% Local Variables: %%% mode: latex %%% TeX-master: t %%% End:
+%%% Local Variables: %%% mode: latex %%% TeX-master: t %%% End: 

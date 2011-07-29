@@ -24,6 +24,7 @@
 \usepackage{amssymb} \usepackage{amsthm} \usepackage{amsmath} \usepackage[utf8]{inputenc} \usepackage{listings} \usepackage{tabularx} \usepackage{makeidx} \makeindex \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 
 \newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
 
 \newcommand{\R}{\proglang{R}} \newcommand{\Se}{\mbox{Se}} \newcommand{\Sp}{\mbox{Sp}}
 
