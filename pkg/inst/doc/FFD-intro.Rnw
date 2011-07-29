@@ -330,7 +330,7 @@ The most convenient way to use the package \texttt{FFD} is via the \index{GUI} \
 
 \begin{figure}[h!t]
 \begin{center}
-\includegraphics[width=120mm]{GUI_reset.png}
+\includegraphics[width=120mm]{GUI_Reset.png}
 \end{center}
 \caption{Main window of the FFD-GUI}
 \label{fig:GUI_reset}
