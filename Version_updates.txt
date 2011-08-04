@@ -1,4 +1,9 @@
 Version updates:
+1.0-1
+-----------
+2011-08-03:
+ - Sorted out issues with vignette and package checking.
+
 
 1.0-0
 -----------

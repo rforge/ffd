@@ -5,6 +5,8 @@ FFD_GUI <- function(){
 	tclRequire("BWidget")  ## For dropdown menu
 	tclRequire("Tktable") ## For Tables
 	main <- tktoplevel(borderwidth = 10)
+	#cat(str(main))
+	mainEnvir <- get("parent", envir = main$env)$env
 	tkwm.resizable(main, FALSE, FALSE)   # Window not resizable
 	tkwm.title(main, "FFD - GUI")
 	fontBold <- tkfont.create(size = 8, weight = "bold")	
@@ -217,9 +219,11 @@ FFD_GUI <- function(){
 	## Specify risk group parameters:
 	riskGroupTabVar <- tclArray()
 	nRiskGroups <- tclVar("0")
+	## Set global variable for the id of the "set risk groups"-window:
+    assign("setRGWindow_ID", "windowNotYetInitialized", env = .GlobalEnv)
     setRGParameters.but <- tkbutton(frameOptionalInput, text = " Set risk group parameters ", 
 		command = function() setRGParameters(inputDataVar, riskGroupColVar, 
-		riskGroupTabVar, nRiskGroups), 
+		riskGroupTabVar, nRiskGroups, mainEnvir), 
 		padx = 15, pady = 2)    
     tkgrid(setRGParameters.but, columnspan = 2)
 

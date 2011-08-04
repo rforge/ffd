@@ -73,14 +73,11 @@ onOkChooseCol <- function(colNamesVec, columnsBox, columnVar, mainColumns){
 ## Is called by clicking on "Set risk group parameters" on the "Parameters"
 ## tab of the main window.
 setRGParameters <- function(inputDataVar, riskGroupColVar, riskGroupTabVar,
-	nRiskGroups){
+	nRiskGroups, mainEnvir){
 	
-	## If window is already open do nothing:
-	if (exists("setRGWindow")){
-		ID <- .Tk.ID(setRGWindow)
-		env <- get("parent", envir = setRGWindow$env)$env
-		if (exists(ID, envir = env, inherits = FALSE)) return(NULL)
-	}  
+	## Check if window is already open. If window is already open do nothing:
+	ID <- get("setRGWindow_ID", env = .GlobalEnv)
+	if (exists(ID, envir = mainEnvir, inherits = FALSE)) return(NULL)
 	
 	## Read in population data:		
 	if (file.exists(tclvalue(inputDataVar))){
@@ -110,7 +107,11 @@ setRGParameters <- function(inputDataVar, riskGroupColVar, riskGroupTabVar,
 	    }
 	}
 	
-	setRGWindow <<- tktoplevel(padx = 10, pady = 10)	
+	setRGWindow <- tktoplevel(padx = 10, pady = 10)	
+	ID <- .Tk.ID(setRGWindow)
+	## Save id of window to global variable (for the check if the window is 
+	## already open or not):
+	assign("setRGWindow_ID", ID, env = .GlobalEnv)
 	tkwm.title(setRGWindow, "FFD - Risk Group Data")
 	tkwm.resizable(setRGWindow, FALSE, FALSE)
 	rgTop <- tkframe(setRGWindow, padx = 5, pady = 5)
@@ -166,16 +167,6 @@ resetArray <- function(arrayVar, nRows, nCols){
 	} 	
 } 
 		
-#testFun <- function(arrayVar, guiWindow){
-#	cat(tclvalue(arrayVar[[0,0]]))
-#	if (length(arrayVar[[1,1]]) == 0){
-#		cat (" No data")
-#	} else {
-#		cat(tclvalue(arrayVar[[1,1]]))
-#	}	
-#	tkdestroy(guiWindow)
-#}
-
 
 ###############################################################################
 
@@ -354,6 +345,14 @@ importRiskBasedSamplingParameters <- function(mySurvey, infoList){
 	nSampleFixVec <- as.numeric(nSampleFixVec)
 	probVec <- as.numeric(probVec)
 	
+	## Is the model over-specified, i.e., nSampleFix AND prob specified for a 
+	## risk group:
+	if (any(!is.na(nSampleFixVec) & !is.na(probVec))){
+	    tkmessageBox(message = paste("Warning! Fixed sample size and sample probability\n",
+			"both specified for a risk group.\nIgnoring sample probability.", sep = ""), 
+			icon = "warning", type = "ok")	
+	}
+	
 	## Sample size for all but one risk group is fixed:
 	if (sum(is.na(nSampleFixVec)) == 1){
 		return(list(nSampleFixVec = nSampleFixVec, probVec = 1))
@@ -367,13 +366,6 @@ importRiskBasedSamplingParameters <- function(mySurvey, infoList){
 		return(list(nSampleFixVec = NULL, probVec = NULL))
 	}
 	
-	## Is the model over-specified, i.e., nSampleFix AND prob specified for a 
-	## risk group:
-	if (any(!is.na(nSampleFixVec) & !is.na(probVec))){
-	    tkmessageBox(message = paste("Warning! Fixed sample size and sample probability\n",
-			"both specified for a risk group.\nIgnoring sample probability.", sep = ""), 
-			icon = "warning", type = "ok")	
-	}
 	probVec <- probVec[is.na(nSampleFixVec)]		
 	## Return value:
 	return(list(nSampleFixVec = nSampleFixVec, probVec = probVec))
@@ -1053,15 +1045,21 @@ loadFFD <- function(inputDataVar, herdSizeColVar, riskGroupColVar, pi, alpha,
         
 		## Load file:
 		##############
+		FFD_InfoList <- NULL
 		load(fileName)
 		
 		## Validity check:
 		##################
-		if (!("FFD_InfoList" %in% ls())){
+#		if (!("FFD_InfoList" %in% ls())){
+#			tkmessageBox(message = "Error! Invalid File.", icon = "error",
+#				type = "ok")
+#		    return(NULL)
+#		}
+		if (is.null(FFD_InfoList)){
 			tkmessageBox(message = "Error! Invalid File.", icon = "error",
 				type = "ok")
 		    return(NULL)
-		}		
+		}
 		namesVec <- c("inputDataVar", "herdSizeColVar", "riskGroupColVar", 
 			"pi", "alpha", "piIH", "Se", "costHerd", "costAnimal", 
 			"sampSizeVar", "diagVar", "sampStratBox", "nRiskGroups",
