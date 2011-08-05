@@ -314,7 +314,7 @@ If no constraint is set on the distribution of the overall sample size among the
 
 \section{Designing sampling plans using the GUI} \label{sec:using-ffd-GUI}
 
-The most convenient way to use the package \texttt{FFD} is via the \index{GUI} \index{GUI!main window} graphical user interface (GUI). The FFD-GUI is launched by calling the function \verb+FFD_GUI()+ \index{GUI!\verb+FFD_GUI()+} \index{\verb+FFD_GUI()+} in the \proglang{R} console; see Figure \ref{fig:GUI_reset}. The window is structured into three tabs:
+The most convenient way to use the package \texttt{FFD} is via the \index{GUI} \index{GUI!main window} graphical user interface (GUI). The FFD-GUI is launched by calling the function \verb+FFD_GUI()+ \index{GUI!\verb+FFD_GUI()+} \index{\verb+FFD_GUI()+} in the \proglang{R} console; see Figure \ref{fig:GUI_Reset}. The window is structured into three tabs:
 
 \begin{itemize}
 \item \textbf{Data Input:} Specification of the farm data.
@@ -330,10 +330,10 @@ The most convenient way to use the package \texttt{FFD} is via the \index{GUI} \
 
 \begin{figure}[h!t]
 \begin{center}
-\includegraphics[width=120mm]{GUI_reset.png}
+\includegraphics[width=120mm]{GUI_fresh.png}
 \end{center}
 \caption{Main window of the FFD-GUI}
-\label{fig:GUI_reset}
+\label{fig:GUI_Reset}
 \end{figure}
 
 Via the menu bar settings can be saved and loaded. The file menu further contains built-in examples and help files; see Figure \ref{fig:GUI_menu}.

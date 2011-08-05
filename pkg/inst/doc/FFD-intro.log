@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2011.3.7)  4 AUG 2011 08:29
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2011.3.7)  5 AUG 2011 13:30
 entering extended mode
 **D:/R_packages/FFD_vGUI_Risk/inst/doc/FFD-intro.tex
 (D:/R_packages/FFD_vGUI_Risk/inst/doc/FFD-intro.tex
@@ -910,9 +910,9 @@ Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 9
  []
 
-[9] <GUI_reset.png, id=264, 758.835pt x 506.89375pt>
-File: GUI_reset.png Graphic file (type png)
- <use GUI_reset.png>
+[9] <GUI_fresh.png, id=264, 758.835pt x 506.89375pt>
+File: GUI_fresh.png Graphic file (type png)
+ <use GUI_fresh.png>
 <GUI_menu.png, id=266, 790.955pt x 161.60374pt>
 File: GUI_menu.png Graphic file (type png)
  <use GUI_menu.png>
@@ -925,7 +925,7 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 [10
 
- <D:/R_packages/FFD_vGUI_Risk/inst/doc/GUI_reset.png (PNG copy)>]
+ <D:/R_packages/FFD_vGUI_Risk/inst/doc/GUI_fresh.png (PNG copy)>]
 <GUI_Parameters.png, id=280, 378.41376pt x 500.87125pt>
 File: GUI_Parameters.png Graphic file (type png)
 
@@ -1142,7 +1142,7 @@ msfonts/cm/cmsy8.pfb><C:/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb><C:/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:
 /Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Programme/M
 iKTeX 2.9/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on FFD-intro.pdf (34 pages, 641308 bytes).
+Output written on FFD-intro.pdf (34 pages, 641309 bytes).
 PDF statistics:
  653 PDF objects out of 1000 (max. 8388607)
  128 named destinations out of 1000 (max. 500000)
