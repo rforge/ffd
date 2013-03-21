@@ -79,9 +79,9 @@ mySurvey <- surveyData(nAnimalVec = sheepData$nSheep,
 		diagSensitivity = 0.9, costHerd = 30, costAnimal = 7.1)
 ## Individual sampling without risk groups:    
 myIndSamplingSummary <- indSamplingSummary(survey.Data = mySurvey, 
-    stepSize = 0.02)
+    stepSize = 0.06)
 ## Individual sampling with risk groups:    
 myIndSamplingSummaryRG <- indSamplingSummary(survey.Data = mySurvey, 
-    stepSize = 0.02, nSampleFixVec = NULL, probVec = c(1,4))
+    stepSize = 0.06, nSampleFixVec = NULL, probVec = c(1,4))
 }
 \keyword{methods}

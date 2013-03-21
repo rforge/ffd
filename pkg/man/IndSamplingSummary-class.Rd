@@ -87,7 +87,7 @@ mySurvey <- surveyData(nAnimalVec = sheepData$nSheep,
     alpha = 0.05, intraHerdPrevalence = 0.13,
     diagSensitivity = 0.9, costHerd = 15, costAnimal = 20)
 myIndSamplingSummary <- indSamplingSummary(survey.Data = mySurvey, 
-    stepSize = 0.02)
+    stepSize = 0.06)
 ## Display results:
 summary(myIndSamplingSummary)
 plot(myIndSamplingSummary)
