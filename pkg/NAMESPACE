@@ -3,6 +3,7 @@ useDynLib(FFD)
 import(methods)
 import(R2HTML)
 import(tcltk)
+import(tkrplot)
 importFrom(graphics,plot)
 
 exportClasses(
