@@ -1,4 +1,10 @@
 Version updates:
+1.0-6
+-----------
+2015-02-19
+ - Changed credits for lls
+ - First attempt to remedy problem with global variables in GUI
+
 1.0-1
 -----------
 2011-08-03:
