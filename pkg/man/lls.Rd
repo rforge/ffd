@@ -4,7 +4,7 @@
 List Objects
 }
 \description{
-Function works like ls but it returns the names of the objects 
+Function works like ls() but it returns the names of the objects 
 in the workspace, together with class, dimension and size in the
 form of a data frame.
 }
@@ -52,10 +52,10 @@ objects is used. The pos and envir arguments are an alternative way to specify
 an environment, but are primarily there for back compatibility. 
 }
 \value{
-Rreturns a data frame.
+Returns a data frame.
 }
 \author{
-Ian Kopacka
+Original author unknown, modified by Ian Kopacka
 }
 \examples{
 lls()
