@@ -220,8 +220,8 @@ FFD_GUI <- function(){
 	riskGroupTabVar <- tclArray()
 	nRiskGroups <- tclVar("0")
 	## Set global variable for the id of the "set risk groups"-window:
-    assign("setRGWindow_ID", "windowNotYetInitialized", env = mainEnvir)
-#    assign("setRGWindow_ID", "windowNotYetInitialized", env = .GlobalEnv)
+    assign("setRGWindow_ID", "windowNotYetInitialized", envir = mainEnvir)
+#    assign("setRGWindow_ID", "windowNotYetInitialized", envir = .GlobalEnv)
     setRGParameters.but <- tkbutton(frameOptionalInput, text = " Set risk group parameters ", 
 		command = function() setRGParameters(inputDataVar, riskGroupColVar, 
 		riskGroupTabVar, nRiskGroups, mainEnvir), 

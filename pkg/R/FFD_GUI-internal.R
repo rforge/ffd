@@ -76,8 +76,8 @@ setRGParameters <- function(inputDataVar, riskGroupColVar, riskGroupTabVar,
 	nRiskGroups, mainEnvir){
 	
 	## Check if window is already open. If window is already open do nothing:
-    ID <- get("setRGWindow_ID", env = mainEnvir)
-#	ID <- get("setRGWindow_ID", env = .GlobalEnv)
+    ID <- get("setRGWindow_ID", envir = mainEnvir)
+#	ID <- get("setRGWindow_ID", envir = .GlobalEnv)
 	if (exists(ID, envir = mainEnvir, inherits = FALSE)) return(NULL)
 	
 	## Read in population data:		
@@ -112,8 +112,8 @@ setRGParameters <- function(inputDataVar, riskGroupColVar, riskGroupTabVar,
 	ID <- .Tk.ID(setRGWindow)
 	## Save id of window to global variable (for the check if the window is 
 	## already open or not):
-	assign("setRGWindow_ID", ID, env = mainEnvir)
-#    assign("setRGWindow_ID", ID, env = .GlobalEnv)
+	assign("setRGWindow_ID", ID, envir = mainEnvir)
+#    assign("setRGWindow_ID", ID, envir = .GlobalEnv)
 	tkwm.title(setRGWindow, "FFD - Risk Group Data")
 	tkwm.resizable(setRGWindow, FALSE, FALSE)
 	rgTop <- tkframe(setRGWindow, padx = 5, pady = 5)
