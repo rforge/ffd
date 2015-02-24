@@ -28,7 +28,7 @@
 ##
 ## Source: M. Ziller, T. Selhorst, J. Teuffert, M. Kramer and H. Schlueter, 
 ## "Analysis of sampling strategies to substantiate freedom from disease in 
-## large areas", Prev. Vet. Med. 52 (2002), pp. 333–343.
+## large areas", Prev. Vet. Med. 52 (2002), pp. 333--343.
 ##
 ## Calls:
 ##    computePValue.R

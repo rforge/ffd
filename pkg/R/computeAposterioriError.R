@@ -1,12 +1,11 @@
 ## Freedom from disease nach Ziller et al.
 ##
-## Funktionen zur Analyse der erreichten Sicherheit für
-## unterschiedliche Samplingstrategien.
+## Functions to analyze the achieved statistical error 
+## (alpha-error) for different sampling strategies.
 ##
 ## Ian Kopacka
 ## 2010-07-06
 
-## Funktionen zur nachträglichen Berechnung der Sicherheit:
 
 ###############################################################################
 ###############################################################################
@@ -58,7 +57,7 @@ computeAposterioriError <- function(alphaErrorVector, nPopulation,
         probabilitiesDiseasedVector <- choose(nPopulation - nSample,
             nDiseased - c(0, nDiseasedSampleVector)) / choose(nPopulation, 
             nDiseased)
-        ## Fehlercheck:
+        ## Error check:
 		if (any(is.nan(probabilitiesDiseasedVector))){
 		probabilitiesDiseasedVector <- exp(lfactorial(nPopulation - nSample) - 
 			lfactorial(nDiseased - c(0, nDiseasedSampleVector)) - 
@@ -115,7 +114,7 @@ computeAposterioriError <- function(alphaErrorVector, nPopulation,
 
 ###################################################################
 ###################################################################
-## Hilfsfunktionen:
+## Helper functions:
 
 prodCombN10 <- function(matPot,potList){
     ## Initialisiere Summe:
@@ -173,7 +172,8 @@ sumDecomp10 <- function(nExp){
 ###################################################################
 
 iterationExpList10 <- function(nExp, expList){
-    # bei allen mit länge > 1 und letzter < vorletzter: addiere zum letzten 1
+    ## For all with a length greater than 1 and where the last element
+    ## is smaller than the previous one add 1 to the last element:    
     l1 <- c(nExp,lapply(expList, function(x){
         nVec <- length(x)
         if((nVec > 1) && (x[nVec] < x[nVec-1])){
@@ -185,7 +185,7 @@ iterationExpList10 <- function(nExp, expList){
     }))
     l1 <- l1[!sapply(l1, is.null)]
  
-    ## hänge hinten 1 dran
+    ## Append 1:
     l2 <- lapply(expList, function(x) c(x,1))
     return(c(l1,l2))
 }
