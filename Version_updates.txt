@@ -1,4 +1,9 @@
 Version updates:
+1.0-7
+-----------
+2020-12-16
+  - First attempt at solving problem with tkrplot dependency
+
 1.0-6
 -----------
 2015-02-19

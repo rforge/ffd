@@ -785,33 +785,39 @@ sampleFarms <- function(tt, main, infoList, sampSizeVar, boxValue,
 
 # Hilfsfunktion:
 plotWidget <- function(mySamplingSummary){
-	plotFunction <- function()
-	{
-		params <- par(bg = "white")
-		plot(mySamplingSummary)
-		par(params)
-	}
-	plotWin <- tktoplevel()
-	tkwm.resizable(plotWin, FALSE, FALSE)   # Window not resizable
-	tkwm.title(plotWin, "Diagnostic Plot")
-	## Plot frame:
-	framePlot <- tkframe(plotWin, padx = 10, pady = 10,
-		relief = "groove", borderwidth = 0)	
-	img <- tkrplot(framePlot, fun = plotFunction, 
-		hscale = 1.7, vscale = 1.7)
-	tkgrid(img)
-	## Buttons frame:
-	frameButton <- tkframe(plotWin, padx = 10, pady = 10,
-		relief = "groove", borderwidth = 0)	
-	
-	close.but <- tkbutton(frameButton, text=" Close ", 
-			command = function() tkdestroy(plotWin), padx = 15, pady = 2)
-	save.but <- tkbutton(frameButton, text=" Save ", 
-		command = function() savePlot(mySamplingSummary), padx = 15, pady = 2)
-	#tkgrid(close.but)
-	tkgrid(save.but, tklabel(frameButton,text=" "), close.but)
-	tkgrid(framePlot)
-	tkgrid(frameButton)	
+  # Only plot if package tkrplot is available:
+  if (requireNamespace("tkrplot", quietly = TRUE)) {
+    plotFunction <- function()
+    {
+      params <- par(bg = "white")
+      plot(mySamplingSummary)
+      par(params)
+    }
+    plotWin <- tktoplevel()
+    tkwm.resizable(plotWin, FALSE, FALSE)   # Window not resizable
+    tkwm.title(plotWin, "Diagnostic Plot")
+    ## Plot frame:
+    framePlot <- tkframe(plotWin, padx = 10, pady = 10,
+        relief = "groove", borderwidth = 0)	
+    img <- tkrplot::tkrplot(framePlot, fun = plotFunction, 
+        hscale = 1.7, vscale = 1.7)
+    tkgrid(img)
+    ## Buttons frame:
+    frameButton <- tkframe(plotWin, padx = 10, pady = 10,
+        relief = "groove", borderwidth = 0)	
+    
+    close.but <- tkbutton(frameButton, text=" Close ", 
+        command = function() tkdestroy(plotWin), padx = 15, pady = 2)
+    save.but <- tkbutton(frameButton, text=" Save ", 
+        command = function() savePlot(mySamplingSummary), padx = 15, pady = 2)
+    #tkgrid(close.but)
+    tkgrid(save.but, tklabel(frameButton,text=" "), close.but)
+    tkgrid(framePlot)
+    tkgrid(frameButton)	
+  } else {
+    tkmessageBox(message = "Package 'tkrplot' not available",
+        icon = "error", type = "ok")
+  }  
 }
 	
 ## Function: Tab Sample Size, Calculate Sample size
