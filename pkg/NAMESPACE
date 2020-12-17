@@ -3,8 +3,11 @@ useDynLib(FFD)
 import(methods)
 import(R2HTML)
 import(tcltk)
-import(tkrplot)
-importFrom(graphics,plot)
+importFrom("grDevices", "dev.off", "jpeg", "pdf", "png")
+importFrom("graphics", "par", "title", "plot")
+importFrom("stats", "dhyper", "median")
+importFrom("utils", "capture.output", "head", "help", "object.size",
+           "packageDescription", "read.csv2", "str", "write.csv2")
 
 exportClasses(
               SurveyData,
